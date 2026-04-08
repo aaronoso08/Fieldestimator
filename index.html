@@ -3,34 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Job Estimator</title>
+<title>Job Estimator / Estimador de Trabajo</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brand: #6B2D0F;
-    --brand-mid: #8B3A12;
-    --brand-light: #A0522D;
-    --accent: #E87A2A;
-    --bg: #F7F3EF;
-    --surface: #FFFFFF;
-    --surface2: #FDF8F4;
-    --border: #E8DDD4;
-    --text: #1C1209;
-    --text2: #5C4033;
-    --text3: #9C7B6B;
-    --green: #16A34A;
-    --green-bg: #DCFCE7;
-    --green-dark: #166534;
-    --red: #DC2626;
-    --red-bg: #FEE2E2;
-    --red-dark: #991B1B;
-    --yellow-bg: #FEF3C7;
-    --sh-sm: 0 1px 3px rgba(107,45,15,.08);
-    --sh: 0 4px 12px rgba(107,45,15,.12);
-    --r: 10px;
-    --rl: 14px;
-    --font: 'DM Sans', sans-serif;
-    --mono: 'DM Mono', monospace;
+    --brand: #6B2D0F; --brand-mid: #8B3A12; --brand-light: #A0522D;
+    --accent: #E87A2A; --bg: #F7F3EF; --surface: #FFFFFF; --surface2: #FDF8F4;
+    --border: #E8DDD4; --text: #1C1209; --text2: #5C4033; --text3: #9C7B6B;
+    --green: #16A34A; --green-bg: #DCFCE7; --green-dark: #166534;
+    --red: #DC2626; --red-bg: #FEE2E2; --red-dark: #991B1B;
+    --yellow-bg: #FEF3C7; --blue: #1D4ED8; --blue-bg: #DBEAFE;
+    --sh-sm: 0 1px 3px rgba(107,45,15,.08); --sh: 0 4px 12px rgba(107,45,15,.12);
+    --r: 10px; --rl: 14px; --font: 'DM Sans', sans-serif; --mono: 'DM Mono', monospace;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; -webkit-font-smoothing: antialiased; }
@@ -39,23 +23,31 @@
   .topbar {
     background: linear-gradient(135deg, var(--brand) 0%, var(--brand-mid) 60%, var(--brand-light) 100%);
     color: #fff; padding: 0 16px; padding-top: env(safe-area-inset-top);
-    display: flex; align-items: center; gap: 12px; height: 56px;
+    display: flex; align-items: center; gap: 10px; height: 56px;
     position: sticky; top: 0; z-index: 100; box-shadow: var(--sh);
   }
-  .topbar-icon {
-    width: 34px; height: 34px;
-    background: rgba(255,255,255,.15);
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
+  .topbar-icon { width: 34px; height: 34px; background: rgba(255,255,255,.15); border-radius: 10px; flex-shrink: 0; }
   .topbar-title { font-family: var(--mono); font-size: .9rem; font-weight: 500; letter-spacing: .04em; }
   .topbar-sub { font-size: .62rem; opacity: .65; margin-top: 1px; }
-  .topbar-actions { margin-left: auto; display: flex; gap: 6px; }
-  .btn-tb { font-family: var(--font); font-size: .75rem; font-weight: 600; padding: 6px 14px; border-radius: 7px; border: 1.5px solid rgba(255,255,255,.3); background: rgba(255,255,255,.9); color: var(--brand); cursor: pointer; transition: all .15s; }
+  .topbar-actions { margin-left: auto; display: flex; gap: 6px; align-items: center; }
+  .btn-tb { font-family: var(--font); font-size: .75rem; font-weight: 600; padding: 6px 12px; border-radius: 7px; border: 1.5px solid rgba(255,255,255,.3); background: rgba(255,255,255,.9); color: var(--brand); cursor: pointer; transition: all .15s; white-space: nowrap; }
   .btn-tb:hover { background: #fff; }
+  .btn-tb.lang { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.4); font-family: var(--mono); font-size: .7rem; letter-spacing: .05em; }
+  .btn-tb.lang:hover { background: rgba(255,255,255,.25); }
+
+  /* NAV TABS */
+  .nav-tabs { background: var(--surface); border-bottom: 2px solid var(--border); display: flex; padding: 0 16px; gap: 0; position: sticky; top: 56px; z-index: 90; box-shadow: var(--sh-sm); }
+  .nav-tab { font-size: .82rem; font-weight: 600; padding: 12px 18px; color: var(--text3); cursor: pointer; border-bottom: 2.5px solid transparent; margin-bottom: -2px; transition: all .15s; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+  .nav-tab:hover { color: var(--text2); }
+  .nav-tab.active { color: var(--brand); border-bottom-color: var(--accent); }
+  .nav-tab .tab-icon { font-size: 1rem; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
 
   /* LAYOUT */
-  .main { max-width: 860px; margin: 0 auto; padding: 20px 14px 80px; }
+  .main { max-width: 880px; margin: 0 auto; padding: 20px 14px 80px; }
 
   /* CARD */
   .card { background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--rl); margin-bottom: 14px; box-shadow: var(--sh-sm); overflow: hidden; }
@@ -69,14 +61,15 @@
   @media(max-width:560px){ .form-grid { grid-template-columns: 1fr; } }
   .fg { display: flex; flex-direction: column; gap: 5px; }
   label { font-size: .72rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; }
-  input[type=text], input[type=number], select {
+  input[type=text], input[type=number], input[type=email], select, textarea {
     background: var(--bg); border: 1.5px solid var(--border); border-radius: var(--r);
     color: var(--text); font-family: var(--font); font-size: .88rem; padding: 8px 10px;
     width: 100%; transition: border-color .15s; -webkit-appearance: none; box-shadow: var(--sh-sm);
   }
-  input:focus, select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,122,42,.12); }
+  textarea { resize: vertical; min-height: 70px; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,122,42,.12); }
 
-  /* TABLE */
+  /* MEASURES TABLE */
   .tbl-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; min-width: 540px; }
   thead tr { border-bottom: 1.5px solid var(--border); background: var(--surface2); }
@@ -89,18 +82,14 @@
   .mcheck { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
   .mname { font-size: .85rem; font-weight: 600; color: var(--text); }
   .msub { font-family: var(--mono); font-size: .68rem; color: var(--text3); margin-top: 2px; }
-
   .rbadge { display: inline-block; font-family: var(--mono); font-size: .72rem; font-weight: 500; color: var(--green-dark); background: var(--green-bg); border: 1px solid rgba(22,163,74,.2); padding: 3px 8px; border-radius: 5px; white-space: nowrap; }
   .rbadge.flat { color: var(--brand); background: rgba(107,45,15,.07); border-color: rgba(107,45,15,.18); }
   .rbadge.ineligible { color: var(--red); background: var(--red-bg); border-color: rgba(220,38,38,.2); }
-
   .minput { background: var(--bg); border: 1.5px solid var(--border); border-radius: 7px; color: var(--text); font-family: var(--mono); font-size: .78rem; padding: 5px 8px; width: 90px; text-align: right; transition: border-color .15s; }
   .minput:focus { outline: none; border-color: var(--accent); }
   .minput:disabled { opacity: .3; cursor: not-allowed; }
-
   .minc { font-family: var(--mono); font-size: .85rem; font-weight: 600; color: var(--green); text-align: right; white-space: nowrap; }
   .minc.zero { color: var(--text3); font-weight: 400; }
-
   .warn-tag { display: inline-block; font-size: .65rem; font-weight: 700; color: var(--red-dark); background: var(--red-bg); border: 1px solid rgba(220,38,38,.2); padding: 2px 6px; border-radius: 4px; margin-top: 3px; }
 
   /* TOTALS */
@@ -115,37 +104,101 @@
   .tc-val.green { color: var(--green); }
   .tc-sub { font-size: .72rem; color: var(--text3); margin-top: 3px; }
 
-  /* DOC */
+  /* DOCS */
   .doc-box { background: var(--surface2); border: 1.5px solid var(--border); border-radius: var(--r); padding: 14px; margin-bottom: 10px; }
   .doc-box:last-child { margin-bottom: 0; }
   .doc-title { font-size: .72rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; }
   .doc-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
   .doc-list li { display: flex; align-items: flex-start; gap: 8px; font-size: .82rem; color: var(--text2); line-height: 1.5; }
   .doc-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
-  .doc-list a { color: var(--brand); text-decoration: none; font-weight: 600; }
-  .doc-list a:hover { text-decoration: underline; }
-
   .pills { display: flex; flex-wrap: wrap; gap: 6px; }
   .pill { font-family: var(--mono); font-size: .72rem; background: var(--surface); border: 1.5px solid var(--border); color: var(--text3); padding: 3px 10px; border-radius: 5px; }
   .pill.on { background: rgba(107,45,15,.07); border-color: rgba(107,45,15,.25); color: var(--brand); font-weight: 600; }
-
-  /* META */
   .meta-row { display: flex; flex-wrap: wrap; gap: 12px; padding: 10px 16px; border-top: 1.5px solid var(--border); background: var(--surface2); font-family: var(--mono); font-size: .7rem; color: var(--text3); }
   .meta-row b { color: var(--text2); }
-
-  /* ALERT */
   .alert { padding: 10px 12px; border-radius: 8px; font-size: .8rem; margin-top: 10px; }
   .alert.warn { background: var(--yellow-bg); border: 1px solid rgba(217,119,6,.25); color: #78350f; }
-
   .source-note { font-size: .72rem; color: var(--text3); padding: 8px 16px; border-top: 1px solid var(--border); text-align: right; }
-  .source-note a { color: var(--brand); text-decoration: none; font-weight: 600; }
-  .source-note a:hover { text-decoration: underline; }
+
+  /* ── INVOICE SCREEN ── */
+  .inv-header-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width:560px){ .inv-header-grid { grid-template-columns: 1fr; } }
+
+  /* Line items table */
+  .line-table { width: 100%; border-collapse: collapse; }
+  .line-table thead tr { background: var(--surface2); border-bottom: 1.5px solid var(--border); }
+  .line-table th { font-size: .68rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; padding: 8px 10px; text-align: left; white-space: nowrap; }
+  .line-table th:last-child { text-align: right; }
+  .line-table td { padding: 7px 10px; vertical-align: middle; border-bottom: 1px solid var(--border); }
+  .line-table tr:last-child td { border-bottom: none; }
+  .line-table input { background: transparent; border: none; font-family: var(--font); font-size: .85rem; color: var(--text); padding: 2px 4px; width: 100%; }
+  .line-table input:focus { outline: none; background: var(--bg); border-radius: 5px; }
+  .line-table input.right { text-align: right; font-family: var(--mono); }
+  .line-table .line-total { font-family: var(--mono); font-size: .85rem; font-weight: 600; color: var(--text); text-align: right; white-space: nowrap; }
+  .line-table .line-total.zero { color: var(--text3); }
+  .line-del { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 1rem; padding: 2px 6px; border-radius: 5px; transition: all .15s; }
+  .line-del:hover { background: var(--red-bg); color: var(--red); }
+  .btn-add-line { font-family: var(--font); font-size: .78rem; font-weight: 600; color: var(--brand); background: rgba(107,45,15,.06); border: 1.5px dashed rgba(107,45,15,.25); border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all .15s; width: 100%; margin-top: 10px; }
+  .btn-add-line:hover { background: rgba(107,45,15,.1); }
+
+  /* Invoice totals */
+  .inv-totals { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .inv-total-row { display: flex; gap: 16px; align-items: baseline; font-size: .85rem; }
+  .inv-total-row .lbl { color: var(--text3); min-width: 130px; text-align: right; }
+  .inv-total-row .val { font-family: var(--mono); font-size: .9rem; color: var(--text); min-width: 90px; text-align: right; }
+  .inv-total-row.grand .lbl { color: var(--text2); font-weight: 700; font-size: .9rem; }
+  .inv-total-row.grand .val { color: var(--brand); font-size: 1.15rem; font-weight: 600; }
+  .inv-divider { width: 240px; height: 1.5px; background: var(--border); margin: 4px 0; align-self: flex-end; }
+
+  /* Invoice summary cards */
+  .inv-summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 14px; }
+  @media(max-width:600px){ .inv-summary { grid-template-columns: 1fr 1fr; } }
+
+  /* Discount/deposit inputs */
+  .inv-adj-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+  .inv-adj-row label { font-size: .72rem; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; margin: 0; }
+  .inv-adj-row input { width: 110px; flex-shrink: 0; }
+  .inv-adj-row select { width: auto; flex-shrink: 0; }
+
+  /* Status badge */
+  .status-badge { display: inline-flex; align-items: center; gap: 5px; font-size: .72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: .04em; }
+  .status-badge.paid { background: var(--green-bg); color: var(--green-dark); border: 1px solid rgba(22,163,74,.2); }
+  .status-badge.unpaid { background: var(--red-bg); color: var(--red-dark); border: 1px solid rgba(220,38,38,.2); }
+  .status-badge.partial { background: var(--yellow-bg); color: #78350f; border: 1px solid rgba(217,119,6,.25); }
+
+  /* Notes */
+  .inv-notes { font-size: .82rem; color: var(--text2); line-height: 1.6; }
+
+  /* Action buttons */
+  .action-bar { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 16px; border-top: 1.5px solid var(--border); background: var(--surface2); }
+  .btn-action { font-family: var(--font); font-size: .78rem; font-weight: 600; padding: 8px 16px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text2); cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 6px; }
+  .btn-action:hover { background: var(--bg); border-color: var(--text3); }
+  .btn-action.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+  .btn-action.primary:hover { background: var(--brand-mid); }
+  .btn-action.green { background: var(--green); color: #fff; border-color: var(--green); }
+  .btn-action.green:hover { background: #15803d; }
+
+  /* Category tag for line items */
+  .cat-tag { font-family: var(--mono); font-size: .65rem; padding: 2px 6px; border-radius: 4px; background: var(--surface2); border: 1px solid var(--border); color: var(--text3); }
+  .cat-tag.labor { background: rgba(29,78,216,.07); border-color: rgba(29,78,216,.2); color: var(--blue); }
+  .cat-tag.material { background: rgba(232,122,42,.07); border-color: rgba(232,122,42,.2); color: #92400e; }
+  .cat-tag.incentive { background: var(--green-bg); border-color: rgba(22,163,74,.2); color: var(--green-dark); }
+
+  /* Import from estimator banner */
+  .import-banner { background: rgba(232,122,42,.06); border: 1.5px solid rgba(232,122,42,.25); border-radius: var(--r); padding: 11px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .import-banner-text { font-size: .82rem; color: var(--text2); flex: 1; }
+  .import-banner-text b { color: var(--brand); }
+  .btn-import { font-family: var(--font); font-size: .75rem; font-weight: 700; padding: 6px 14px; border-radius: 7px; border: none; background: var(--accent); color: #fff; cursor: pointer; white-space: nowrap; transition: all .15s; }
+  .btn-import:hover { background: #d46820; }
 
   @media print {
     .no-print { display: none !important; }
+    .nav-tabs { display: none !important; }
     body { background: #fff; }
     .card { box-shadow: none; border: 1px solid #ddd; }
     .main { padding: 0; max-width: 100%; }
+    .screen { display: block !important; }
+    .screen:not(.print-target) { display: none !important; }
   }
 </style>
 </head>
@@ -154,28 +207,44 @@
 <div class="topbar">
   <div class="topbar-icon"></div>
   <div>
-    <div class="topbar-title">JOB ESTIMATOR</div>
-    <div class="topbar-sub">Oregon Residential · 2026</div>
+    <div class="topbar-title" id="tb-title">JOB ESTIMATOR</div>
+    <div class="topbar-sub" id="tb-sub">Oregon Residential · 2026</div>
   </div>
   <div class="topbar-actions no-print">
-    <button class="btn-tb" onclick="window.print()">🖨 Print / Save PDF</button>
+    <button class="btn-tb lang" id="langBtn" onclick="toggleLang()">🌐 ES→EN</button>
+    <button class="btn-tb" onclick="doPrint()">🖨 <span data-en="Print / PDF" data-es="Imprimir / PDF">Print / PDF</span></button>
   </div>
 </div>
 
+<div class="nav-tabs no-print">
+  <div class="nav-tab active" id="tab-est" onclick="showTab('estimator')">
+    <span class="tab-icon">📋</span>
+    <span data-en="Estimator" data-es="Estimador">Estimator</span>
+  </div>
+  <div class="nav-tab" id="tab-inv" onclick="showTab('invoice')">
+    <span class="tab-icon">🧾</span>
+    <span data-en="Invoice" data-es="Factura">Invoice</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SCREEN 1 — ESTIMATOR
+════════════════════════════════════════════ -->
+<div class="screen active" id="screen-estimator">
 <div class="main">
 
   <!-- 01 JOB INFO -->
   <div class="card">
-    <div class="card-header"><span class="card-num">01</span><span class="card-title">Job Information</span></div>
+    <div class="card-header"><span class="card-num">01</span><span class="card-title" data-en="Job Information" data-es="Información del Trabajo">Job Information</span></div>
     <div class="card-body">
       <div class="form-grid">
-        <div class="fg"><label>Customer Name</label><input type="text" id="custName" placeholder="Jane Smith"></div>
-        <div class="fg"><label>Property Address</label><input type="text" id="custAddr" placeholder="123 Main St, Portland OR"></div>
-        <div class="fg"><label>Contractor Name</label><input type="text" id="contractor" placeholder="Your company name"></div>
+        <div class="fg"><label data-en="Customer Name" data-es="Nombre del Cliente">Customer Name</label><input type="text" id="custName" data-ph-en="Jane Smith" data-ph-es="Juan García" placeholder="Jane Smith"></div>
+        <div class="fg"><label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label><input type="text" id="custAddr" data-ph-en="123 Main St, Portland OR" data-ph-es="123 Calle Principal, Portland OR" placeholder="123 Main St, Portland OR"></div>
+        <div class="fg"><label data-en="Contractor Name" data-es="Nombre del Contratista">Contractor Name</label><input type="text" id="contractor" data-ph-en="Your company name" data-ph-es="Nombre de su empresa" placeholder="Your company name"></div>
         <div class="fg">
-          <label>Utility Provider</label>
+          <label data-en="Utility Provider" data-es="Proveedor de Servicios">Utility Provider</label>
           <select id="utility" onchange="update()">
-            <option value="">— Select utility —</option>
+            <option value="" data-en="— Select utility —" data-es="— Seleccione proveedor —">— Select utility —</option>
             <option value="PGE">Portland General Electric (PGE)</option>
             <option value="PacPower">Pacific Power</option>
             <option value="NWNatural">NW Natural</option>
@@ -184,21 +253,21 @@
           </select>
         </div>
         <div class="fg">
-          <label>Property Type</label>
+          <label data-en="Property Type" data-es="Tipo de Propiedad">Property Type</label>
           <select id="propType" onchange="update()">
-            <option value="">— Select type —</option>
-            <option value="sfOwner">Single-Family — Owner-Occupied</option>
-            <option value="sfRental">Single-Family — Rental</option>
-            <option value="attached">Attached (duplex / triplex / townhome)</option>
-            <option value="manufactured">Manufactured Home</option>
+            <option value="" data-en="— Select type —" data-es="— Seleccione tipo —">— Select type —</option>
+            <option value="sfOwner" data-en="Single-Family — Owner-Occupied" data-es="Unifamiliar — Dueño Habita">Single-Family — Owner-Occupied</option>
+            <option value="sfRental" data-en="Single-Family — Rental" data-es="Unifamiliar — Renta">Single-Family — Rental</option>
+            <option value="attached" data-en="Attached (duplex / triplex / townhome)" data-es="Adjunto (dúplex / tríplex / townhome)">Attached (duplex / triplex / townhome)</option>
+            <option value="manufactured" data-en="Manufactured Home" data-es="Casa Manufacturada">Manufactured Home</option>
           </select>
         </div>
         <div class="fg">
-          <label>Program</label>
+          <label data-en="Program" data-es="Programa">Program</label>
           <select id="program" onchange="update()">
-            <option value="standard">Standard</option>
-            <option value="swr">Savings Within Reach (SWR)</option>
-            <option value="instant">Instant Incentive</option>
+            <option value="standard" data-en="Standard" data-es="Estándar">Standard</option>
+            <option value="swr" data-en="Savings Within Reach (SWR)" data-es="Ahorros al Alcance (SWR)">Savings Within Reach (SWR)</option>
+            <option value="instant" data-en="Instant Incentive" data-es="Incentivo Instantáneo">Instant Incentive</option>
           </select>
         </div>
       </div>
@@ -207,116 +276,352 @@
 
   <!-- 02 MEASURES -->
   <div class="card">
-    <div class="card-header"><span class="card-num">02</span><span class="card-title">Select Measures</span></div>
+    <div class="card-header"><span class="card-num">02</span><span class="card-title" data-en="Select Measures" data-es="Seleccionar Medidas">Select Measures</span></div>
     <div class="tbl-wrap">
       <table>
         <thead>
           <tr>
             <th style="width:32px"></th>
-            <th>Measure</th>
-            <th>Incentive Rate</th>
-            <th style="width:95px">Qty / Sq Ft</th>
-            <th style="width:105px">Your Job Cost</th>
-            <th style="width:100px;text-align:right">Incentive</th>
+            <th data-en="Measure" data-es="Medida">Measure</th>
+            <th data-en="Incentive Rate" data-es="Tasa de Incentivo">Incentive Rate</th>
+            <th style="width:95px" data-en="Qty / Sq Ft" data-es="Cant / Pie²">Qty / Sq Ft</th>
+            <th style="width:105px" data-en="Your Job Cost" data-es="Costo del Trabajo">Your Job Cost</th>
+            <th style="width:100px;text-align:right" data-en="Incentive" data-es="Incentivo">Incentive</th>
           </tr>
         </thead>
         <tbody id="measuresBody"></tbody>
       </table>
     </div>
-    
   </div>
 
   <!-- 03 TOTALS -->
   <div class="card">
-    <div class="card-header"><span class="card-num">03</span><span class="card-title">Summary</span></div>
+    <div class="card-header"><span class="card-num">03</span><span class="card-title" data-en="Summary" data-es="Resumen">Summary</span></div>
     <div class="card-body">
       <div class="totals-grid">
         <div class="tc orange">
-          <div class="tc-label">Total Job Cost</div>
+          <div class="tc-label" data-en="Total Job Cost" data-es="Costo Total del Trabajo">Total Job Cost</div>
           <div class="tc-val orange" id="totalCost">$0.00</div>
-          <div class="tc-sub">Labor + materials</div>
+          <div class="tc-sub" data-en="Labor + materials" data-es="Mano de obra + materiales">Labor + materials</div>
         </div>
         <div class="tc green">
-          <div class="tc-label">Total Incentive</div>
+          <div class="tc-label" data-en="Total Incentive" data-es="Incentivo Total">Total Incentive</div>
           <div class="tc-val green" id="totalInc">$0.00</div>
-          <div class="tc-sub">Paid to contractor</div>
+          <div class="tc-sub" data-en="Paid to contractor" data-es="Pagado al contratista">Paid to contractor</div>
         </div>
         <div class="tc">
-          <div class="tc-label">Customer Pays</div>
+          <div class="tc-label" data-en="Customer Pays" data-es="Cliente Paga">Customer Pays</div>
           <div class="tc-val" id="netCost">$0.00</div>
-          <div class="tc-sub">After incentive</div>
+          <div class="tc-sub" data-en="After incentive" data-es="Después del incentivo">After incentive</div>
         </div>
       </div>
       <div id="alertZone"></div>
     </div>
   </div>
 
-  <!-- 04 FORMS & DOCS -->
+  <!-- 04 FORMS -->
   <div class="card">
-    <div class="card-header"><span class="card-num">04</span><span class="card-title">Forms &amp; Submission Notes</span></div>
+    <div class="card-header"><span class="card-num">04</span><span class="card-title" data-en="Forms &amp; Submission Notes" data-es="Formularios y Notas de Envío">Forms &amp; Submission Notes</span></div>
     <div class="card-body">
       <div class="doc-box">
-        <div class="doc-title">Forms Needed</div>
-        <div class="pills" id="formsNeeded"><span style="color:var(--text3);font-size:.8rem;">Select measures above to see required forms.</span></div>
+        <div class="doc-title" data-en="Forms Needed" data-es="Formularios Necesarios">Forms Needed</div>
+        <div class="pills" id="formsNeeded"><span id="formsPlaceholder" style="color:var(--text3);font-size:.8rem;" data-en="Select measures above to see required forms." data-es="Seleccione medidas arriba para ver los formularios necesarios.">Select measures above to see required forms.</span></div>
       </div>
       <div class="doc-box">
-        <div class="doc-title">Submission Requirements</div>
+        <div class="doc-title" data-en="Submission Requirements" data-es="Requisitos de Envío">Submission Requirements</div>
         <ul class="doc-list">
-          <li>Application + docs must be submitted <b>within 60 days</b> of install.</li>
-          <li>Invoices must be marked <b>"paid in full"</b> before submitting (except SWR / Instant).</li>
-          <li>Incentive <b>cannot exceed total installed cost</b> — this tool caps it automatically.</li>
-          <li>Must hold a current <b>Oregon CCB license</b>.</li>
+          <li><span data-en="Application + docs must be submitted <b>within 60 days</b> of install." data-es="La solicitud + documentos deben enviarse <b>dentro de 60 días</b> de la instalación.">Application + docs must be submitted <b>within 60 days</b> of install.</span></li>
+          <li><span data-en='Invoices must be marked <b>"paid in full"</b> before submitting (except SWR / Instant).' data-es='Las facturas deben marcarse como <b>"pagadas en su totalidad"</b> antes de enviar (excepto SWR / Instantáneo).'>Invoices must be marked <b>"paid in full"</b> before submitting (except SWR / Instant).</span></li>
+          <li><span data-en="Incentive <b>cannot exceed total installed cost</b> — this tool caps it automatically." data-es="El incentivo <b>no puede exceder el costo total instalado</b> — esta herramienta lo limita automáticamente.">Incentive <b>cannot exceed total installed cost</b> — this tool caps it automatically.</span></li>
+          <li><span data-en="Must hold a current <b>Oregon CCB license</b>." data-es="Debe tener una <b>licencia CCB de Oregon</b> vigente.">Must hold a current <b>Oregon CCB license</b>.</span></li>
         </ul>
       </div>
     </div>
     <div class="meta-row">
-      <span><b>Estimate ID:</b> <span id="estimateId">—</span></span>
-      <span><b>Generated:</b> <span id="timestamp">—</span></span>
+      <span><b data-en="Estimate ID:" data-es="ID de Estimado:">Estimate ID:</b> <span id="estimateId">—</span></span>
+      <span><b data-en="Generated:" data-es="Generado:">Generated:</b> <span id="timestamp">—</span></span>
     </div>
   </div>
 
 </div>
+</div><!-- end screen-estimator -->
+
+
+<!-- ════════════════════════════════════════════
+     SCREEN 2 — INVOICE
+════════════════════════════════════════════ -->
+<div class="screen" id="screen-invoice">
+<div class="main">
+
+  <!-- import banner -->
+  <div class="import-banner no-print">
+    <div>📋</div>
+    <div class="import-banner-text"><b data-en="Tip:" data-es="Consejo:">Tip:</b> <span data-en="You can auto-fill this invoice from your Estimator entries." data-es="Puede llenar automáticamente esta factura desde su Estimador.">You can auto-fill this invoice from your Estimator entries.</span></div>
+    <button class="btn-import" onclick="importFromEstimator()" data-en="Import from Estimator" data-es="Importar del Estimador">Import from Estimator</button>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="inv-summary">
+    <div class="tc orange">
+      <div class="tc-label" data-en="Subtotal" data-es="Subtotal">Subtotal</div>
+      <div class="tc-val orange" id="inv-subtotal">$0.00</div>
+    </div>
+    <div class="tc">
+      <div class="tc-label" data-en="Tax" data-es="Impuesto">Tax</div>
+      <div class="tc-val" id="inv-tax-disp">$0.00</div>
+    </div>
+    <div class="tc green">
+      <div class="tc-label" data-en="Incentive Credit" data-es="Crédito de Incentivo">Incentive Credit</div>
+      <div class="tc-val green" id="inv-credit-disp">$0.00</div>
+    </div>
+    <div class="tc" style="border-color: var(--brand); background: rgba(107,45,15,.04);">
+      <div class="tc-label" data-en="Total Due" data-es="Total a Pagar">Total Due</div>
+      <div class="tc-val" id="inv-grand" style="color:var(--brand)">$0.00</div>
+    </div>
+  </div>
+
+  <!-- A: Invoice Info -->
+  <div class="card">
+    <div class="card-header"><span class="card-num">A</span><span class="card-title" data-en="Invoice Details" data-es="Detalles de Factura">Invoice Details</span></div>
+    <div class="card-body">
+      <div class="inv-header-grid">
+        <div class="fg"><label data-en="Invoice #" data-es="Factura #">Invoice #</label><input type="text" id="inv-num" data-ph-en="INV-001" data-ph-es="FAC-001" placeholder="INV-001"></div>
+        <div class="fg"><label data-en="Invoice Date" data-es="Fecha de Factura">Invoice Date</label><input type="text" id="inv-date" placeholder=""></div>
+        <div class="fg"><label data-en="Customer Name" data-es="Nombre del Cliente">Customer Name</label><input type="text" id="inv-cust" data-ph-en="Jane Smith" data-ph-es="Juan García" placeholder="Jane Smith"></div>
+        <div class="fg"><label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label><input type="text" id="inv-addr" data-ph-en="123 Main St, Portland OR" data-ph-es="123 Calle Principal, Portland OR" placeholder="123 Main St, Portland OR"></div>
+        <div class="fg"><label data-en="Contractor / Company" data-es="Contratista / Empresa">Contractor / Company</label><input type="text" id="inv-contractor" data-ph-en="Your company name" data-ph-es="Nombre de su empresa" placeholder="Your company name"></div>
+        <div class="fg"><label data-en="CCB License #" data-es="Licencia CCB #">CCB License #</label><input type="text" id="inv-ccb" placeholder="CCB-XXXXXX"></div>
+        <div class="fg"><label data-en="Contractor Phone" data-es="Teléfono del Contratista">Contractor Phone</label><input type="text" id="inv-phone" placeholder="(503) 555-0100"></div>
+        <div class="fg"><label data-en="Contractor Email" data-es="Correo del Contratista">Contractor Email</label><input type="email" id="inv-email" placeholder="you@company.com"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- B: Line Items -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-num">B</span>
+      <span class="card-title" data-en="Line Items" data-es="Artículos">Line Items</span>
+    </div>
+    <div class="card-body">
+      <div class="tbl-wrap">
+        <table class="line-table" id="lineTable">
+          <thead>
+            <tr>
+              <th data-en="Description" data-es="Descripción">Description</th>
+              <th data-en="Category" data-es="Categoría">Category</th>
+              <th style="width:70px" data-en="Qty" data-es="Cant.">Qty</th>
+              <th style="width:90px" data-en="Unit Price" data-es="Precio Unit.">Unit Price</th>
+              <th style="width:95px;text-align:right" data-en="Total" data-es="Total">Total</th>
+              <th style="width:30px"></th>
+            </tr>
+          </thead>
+          <tbody id="lineBody"></tbody>
+        </table>
+      </div>
+      <button class="btn-add-line" onclick="addLine()" id="addLineBtn" data-en="+ Add Line Item" data-es="+ Agregar Artículo">+ Add Line Item</button>
+    </div>
+  </div>
+
+  <!-- C: Adjustments & Totals -->
+  <div class="card">
+    <div class="card-header"><span class="card-num">C</span><span class="card-title" data-en="Adjustments &amp; Totals" data-es="Ajustes y Totales">Adjustments &amp; Totals</span></div>
+    <div class="card-body">
+      <div class="inv-adj-row">
+        <label data-en="Tax Rate:" data-es="Tasa de Impuesto:">Tax Rate:</label>
+        <input type="number" id="inv-tax-rate" value="0" min="0" max="30" step="0.1" style="width:80px" oninput="calcInvoice()">
+        <span style="font-size:.82rem;color:var(--text3)">%</span>
+        <label style="margin-left:14px" data-en="Discount:" data-es="Descuento:">Discount:</label>
+        <select id="inv-disc-type" onchange="calcInvoice()" style="width:auto;font-size:.8rem;">
+          <option value="flat" data-en="$ Fixed" data-es="$ Fijo">$ Fixed</option>
+          <option value="pct" data-en="% Percent" data-es="% Porcentaje">% Percent</option>
+        </select>
+        <input type="number" id="inv-disc-val" value="0" min="0" step="0.01" style="width:90px" oninput="calcInvoice()">
+        <label style="margin-left:14px" data-en="Deposit Paid:" data-es="Depósito Pagado:">Deposit Paid:</label>
+        <input type="number" id="inv-deposit" value="0" min="0" step="0.01" style="width:100px" oninput="calcInvoice()">
+      </div>
+
+      <div class="inv-totals">
+        <div class="inv-total-row">
+          <span class="lbl" data-en="Subtotal" data-es="Subtotal">Subtotal</span>
+          <span class="val" id="inv-sub2">$0.00</span>
+        </div>
+        <div class="inv-total-row">
+          <span class="lbl" id="inv-disc-lbl" data-en="Discount" data-es="Descuento">Discount</span>
+          <span class="val" id="inv-disc-disp" style="color:var(--red)">– $0.00</span>
+        </div>
+        <div class="inv-total-row">
+          <span class="lbl" id="inv-tax-lbl" data-en="Tax (0%)" data-es="Impuesto (0%)">Tax (0%)</span>
+          <span class="val" id="inv-tax-disp2">$0.00</span>
+        </div>
+        <div class="inv-total-row">
+          <span class="lbl" data-en="ETO Incentive Credit" data-es="Crédito de Incentivo ETO">ETO Incentive Credit</span>
+          <span class="val" id="inv-credit2" style="color:var(--green)">– $0.00</span>
+        </div>
+        <div class="inv-divider"></div>
+        <div class="inv-total-row">
+          <span class="lbl" data-en="After Incentive" data-es="Después del Incentivo">After Incentive</span>
+          <span class="val" id="inv-after-inc">$0.00</span>
+        </div>
+        <div class="inv-total-row">
+          <span class="lbl" data-en="Deposit Paid" data-es="Depósito Pagado">Deposit Paid</span>
+          <span class="val" id="inv-dep-disp" style="color:var(--green)">– $0.00</span>
+        </div>
+        <div class="inv-divider"></div>
+        <div class="inv-total-row grand">
+          <span class="lbl" data-en="BALANCE DUE" data-es="SALDO PENDIENTE">BALANCE DUE</span>
+          <span class="val" id="inv-balance">$0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D: Payment & Notes -->
+  <div class="card">
+    <div class="card-header"><span class="card-num">D</span><span class="card-title" data-en="Payment Status &amp; Notes" data-es="Estado de Pago y Notas">Payment Status &amp; Notes</span></div>
+    <div class="card-body">
+      <div class="form-grid">
+        <div class="fg">
+          <label data-en="Payment Status" data-es="Estado de Pago">Payment Status</label>
+          <select id="inv-status" onchange="updateStatusBadge()">
+            <option value="unpaid" data-en="Unpaid" data-es="Sin Pagar">Unpaid</option>
+            <option value="partial" data-en="Partial Payment" data-es="Pago Parcial">Partial Payment</option>
+            <option value="paid" data-en="Paid in Full" data-es="Pagado en Su Totalidad">Paid in Full</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label data-en="Payment Method" data-es="Método de Pago">Payment Method</label>
+          <select id="inv-method">
+            <option value="" data-en="— Select —" data-es="— Seleccione —">— Select —</option>
+            <option value="check" data-en="Check" data-es="Cheque">Check</option>
+            <option value="cash" data-en="Cash" data-es="Efectivo">Cash</option>
+            <option value="card" data-en="Credit / Debit Card" data-es="Tarjeta de Crédito / Débito">Credit / Debit Card</option>
+            <option value="ach" data-en="ACH / Bank Transfer" data-es="ACH / Transferencia Bancaria">ACH / Bank Transfer</option>
+            <option value="zelle" data-en="Zelle / Venmo" data-es="Zelle / Venmo">Zelle / Venmo</option>
+          </select>
+        </div>
+        <div class="fg" style="grid-column: span 2">
+          <label data-en="Notes / Terms" data-es="Notas / Términos">Notes / Terms</label>
+          <textarea id="inv-notes" rows="3" data-ph-en="Payment due within 30 days. Thank you for your business." data-ph-es="Pago vence en 30 días. Gracias por su negocio." placeholder="Payment due within 30 days. Thank you for your business."></textarea>
+        </div>
+      </div>
+      <div style="margin-top:10px; display:flex; align-items:center; gap:8px;">
+        <span data-en="Status:" data-es="Estado:" style="font-size:.78rem;color:var(--text3);">Status:</span>
+        <span id="statusBadge" class="status-badge unpaid">Unpaid</span>
+      </div>
+    </div>
+    <div class="action-bar no-print">
+      <button class="btn-action primary" onclick="doPrint()">🖨 <span data-en="Print Invoice" data-es="Imprimir Factura">Print Invoice</span></button>
+      <button class="btn-action green" onclick="markPaid()">✅ <span data-en="Mark as Paid" data-es="Marcar como Pagado">Mark as Paid</span></button>
+      <button class="btn-action" onclick="clearInvoice()">🗑 <span data-en="Clear Invoice" data-es="Limpiar Factura">Clear Invoice</span></button>
+    </div>
+  </div>
+
+</div>
+</div><!-- end screen-invoice -->
+
 
 <script>
+// ─────────────────────────────────────────────
+//  LANGUAGE
+// ─────────────────────────────────────────────
+let lang = 'en';
+
+function toggleLang() {
+  lang = lang === 'en' ? 'es' : 'en';
+  applyLang();
+}
+
+function applyLang() {
+  const isES = lang === 'es';
+  document.getElementById('langBtn').textContent = isES ? '🌐 EN→ES' : '🌐 ES→EN';
+  document.getElementById('tb-title').textContent = isES ? 'ESTIMADOR DE TRABAJO' : 'JOB ESTIMATOR';
+  document.getElementById('tb-sub').textContent = isES ? 'Oregon Residencial · 2026' : 'Oregon Residential · 2026';
+
+  // All data-en / data-es elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const txt = el.getAttribute(isES ? 'data-es' : 'data-en');
+    if (txt) el.innerHTML = txt;
+  });
+
+  // Placeholders on inputs
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    el.placeholder = el.getAttribute(isES ? 'data-ph-es' : 'data-ph-en') || '';
+  });
+
+  // Select options
+  document.querySelectorAll('option[data-en]').forEach(opt => {
+    opt.textContent = opt.getAttribute(isES ? 'data-es' : 'data-en') || opt.textContent;
+  });
+
+  // Dynamically built measure rows
+  rebuildMeasureNames();
+  updateStatusBadge();
+  calcInvoice();
+  update();
+}
+
+function t(enText, esText) { return lang === 'es' ? esText : enText; }
+
+// ─────────────────────────────────────────────
+//  TABS
+// ─────────────────────────────────────────────
+let currentTab = 'estimator';
+function showTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('screen-' + tab).classList.add('active');
+  document.getElementById('tab-' + (tab === 'estimator' ? 'est' : 'inv')).classList.add('active');
+}
+
+function doPrint() {
+  document.getElementById('screen-' + currentTab).classList.add('print-target');
+  window.print();
+  document.getElementById('screen-' + currentTab).classList.remove('print-target');
+}
+
+// ─────────────────────────────────────────────
+//  ESTIMATOR DATA
+// ─────────────────────────────────────────────
 const MEASURES = [
-  { id:'attic', name:'Attic Insulation', sub:'Form 320C-WX · per sq ft', type:'sqft', form:'320C-WX',
+  { id:'attic', en:'Attic Insulation', es:'Aislamiento de Ático', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
     baseRate:{sfOwner:1.25,sfRental:1.50,attached:1.50,manufactured:1.25}, swrRate:1.50,
     utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'wall', name:'Wall Insulation', sub:'Form 320C-WX · per sq ft', type:'sqft', form:'320C-WX',
+  { id:'wall', en:'Wall Insulation', es:'Aislamiento de Paredes', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
     baseRate:{sfOwner:1.50,sfRental:2.25,attached:2.25,manufactured:null}, swrRate:2.25,
     utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:['sfOwner','sfRental','attached'] },
-  { id:'floor', name:'Floor Insulation', sub:'Form 320C-WX · per sq ft', type:'sqft', form:'320C-WX',
+  { id:'floor', en:'Floor Insulation', es:'Aislamiento de Piso', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
     baseRate:{sfOwner:0.75,sfRental:1.00,attached:1.00,manufactured:0.75},
     swrRate:{sfOwner:1.00,sfRental:1.00,attached:1.00,manufactured:1.25},
     utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'windows', name:'Windows (Single-Pane Replacement)', sub:'Form 320C-WX · per sq ft', type:'sqft', form:'320C-WX',
+  { id:'windows', en:'Windows (Single-Pane Replacement)', es:'Ventanas (Reemplazo de Un Panel)', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
     baseRate:{sfOwner:10,sfRental:10,attached:10,manufactured:10}, swrRate:null,
     utilityReq:['NWNatural'], propReq:null },
-  { id:'ductlessHP', name:'Ductless Heat Pump', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'ductlessHP', en:'Ductless Heat Pump', es:'Bomba de Calor sin Ductos', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:800,sfRental:1800,attached:1800,manufactured:800}, swrRate:null,
     utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'ductedHP', name:'Ducted Heat Pump', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'ductedHP', en:'Ducted Heat Pump', es:'Bomba de Calor con Ductos', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:1000,sfRental:1000,attached:3000,manufactured:1000}, swrRate:null,
     utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'extCapHP', name:'Extended Capacity Heat Pump', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'extCapHP', en:'Extended Capacity Heat Pump', es:'Bomba de Calor de Capacidad Extendida', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:1000,sfRental:2000,attached:2000,manufactured:1000}, swrRate:2000,
     utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'gasFurnace', name:'Gas Furnace (95%+ AFUE)', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'gasFurnace', en:'Gas Furnace (95%+ AFUE)', es:'Calefactor de Gas (95%+ AFUE)', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:null,sfRental:1600,attached:1600,manufactured:null}, swrRate:1600,
     utilityReq:['NWNatural','Cascade','Avista'], propReq:['sfRental','attached'] },
-  { id:'smartThermo', name:'Smart Thermostat', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'smartThermo', en:'Smart Thermostat', es:'Termostato Inteligente', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:250,sfRental:250,attached:250,manufactured:250}, swrRate:null,
     utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'tanklessWH', name:'Gas Tankless Water Heater', sub:'Form 320C-WH · flat rate', type:'flat', form:'320C-WH',
+  { id:'tanklessWH', en:'Gas Tankless Water Heater', es:'Calentador de Agua a Gas sin Tanque', sub_en:'Form 320C-WH · flat rate', sub_es:'Formulario 320C-WH · tarifa fija', type:'flat', form:'320C-WH',
     baseRate:{sfOwner:400,sfRental:400,attached:400,manufactured:400}, swrRate:null,
     utilityReq:['NWNatural','Cascade','Avista'], propReq:null },
-  { id:'gasFireplace', name:'Gas Fireplace (FE 75%+)', sub:'Form 320C-HVAC · flat rate', type:'flat', form:'320C-HVAC',
+  { id:'gasFireplace', en:'Gas Fireplace (FE 75%+)', es:'Chimenea de Gas (FE 75%+)', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
     baseRate:{sfOwner:250,sfRental:250,attached:250,manufactured:250}, swrRate:null,
     utilityReq:['NWNatural','Cascade','Avista'], propReq:null },
 ];
 
 let state = { utility:'', propType:'', program:'standard', checks:{}, qtys:{}, labors:{}, id:genId() };
-
 function genId() { return 'EST-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substring(2,6).toUpperCase(); }
 
 function init() {
@@ -326,7 +631,7 @@ function init() {
     tr.className = 'mrow'; tr.id = 'row-'+m.id;
     tr.innerHTML = `
       <td><input type="checkbox" class="mcheck" id="chk-${m.id}" onchange="toggle('${m.id}')"></td>
-      <td><div class="mname">${m.name}</div><div class="msub">${m.sub}</div><div id="warn-${m.id}"></div></td>
+      <td><div class="mname" id="mname-${m.id}">${m.en}</div><div class="msub" id="msub-${m.id}">${m.sub_en}</div><div id="warn-${m.id}"></div></td>
       <td><span class="rbadge" id="badge-${m.id}">—</span></td>
       <td><input type="number" class="minput" id="qty-${m.id}" placeholder="${m.type==='sqft'?'sq ft':'1'}" min="0" ${m.type==='flat'?'value="1" max="1"':''} oninput="qc('${m.id}')" disabled></td>
       <td><input type="number" class="minput" id="labor-${m.id}" placeholder="$" min="0" step="0.01" oninput="lc('${m.id}')" disabled></td>
@@ -335,7 +640,19 @@ function init() {
   });
   document.getElementById('timestamp').textContent = new Date().toLocaleString();
   document.getElementById('estimateId').textContent = state.id;
+  // set today on invoice date
+  document.getElementById('inv-date').value = new Date().toLocaleDateString('en-US');
   update();
+  addLine(); addLine(); addLine(); // start with 3 blank lines
+}
+
+function rebuildMeasureNames() {
+  MEASURES.forEach(m => {
+    const nameEl = document.getElementById('mname-'+m.id);
+    const subEl = document.getElementById('msub-'+m.id);
+    if (nameEl) nameEl.textContent = lang === 'es' ? m.es : m.en;
+    if (subEl) subEl.textContent = lang === 'es' ? m.sub_es : m.sub_en;
+  });
 }
 
 function toggle(id) {
@@ -352,6 +669,7 @@ function toggle(id) {
   }
   update();
 }
+
 function qc(id) { state.qtys[id]=parseFloat(document.getElementById('qty-'+id).value)||0; update(); }
 function lc(id) { state.labors[id]=parseFloat(document.getElementById('labor-'+id).value)||0; update(); }
 
@@ -369,15 +687,18 @@ function getRate(m) {
 
 function getWarn(m) {
   const {utility,propType} = state;
-  if (!utility) return 'Select utility to confirm eligibility';
-  if (!propType) return 'Select property type to confirm eligibility';
-  if (m.utilityReq && !m.utilityReq.includes(utility)) return `Not available for ${utility}`;
-  if (m.propReq && !m.propReq.includes(propType)) return 'Not eligible for this property type';
-  if (propType && m.baseRate[propType]===null) return 'No incentive for this combination';
+  if (!utility) return t('Select utility to confirm eligibility','Seleccione proveedor para confirmar elegibilidad');
+  if (!propType) return t('Select property type to confirm eligibility','Seleccione tipo de propiedad para confirmar elegibilidad');
+  if (m.utilityReq && !m.utilityReq.includes(utility)) return t(`Not available for ${utility}`,`No disponible para ${utility}`);
+  if (m.propReq && !m.propReq.includes(propType)) return t('Not eligible for this property type','No elegible para este tipo de propiedad');
+  if (propType && m.baseRate[propType]===null) return t('No incentive for this combination','Sin incentivo para esta combinación');
   return null;
 }
 
 function fmt(n) { return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+let lastTotalInc = 0;
+let lastTotalCost = 0;
 
 function update() {
   state.utility = document.getElementById('utility').value;
@@ -394,12 +715,16 @@ function update() {
 
     const badge = document.getElementById('badge-'+m.id);
     if (!state.utility||!state.propType) { badge.textContent='—'; badge.className='rbadge'; }
-    else if (rate===null) { badge.textContent='Not eligible'; badge.className='rbadge ineligible'; }
-    else { badge.textContent=m.type==='sqft'?`$${rate}/sqft`:`$${rate} flat`; badge.className='rbadge'+(m.type==='flat'?' flat':''); }
+    else if (rate===null) { badge.textContent=t('Not eligible','No elegible'); badge.className='rbadge ineligible'; }
+    else {
+      const sqLabel = lang==='es' ? 'pie²' : 'sqft';
+      badge.textContent = m.type==='sqft' ? `$${rate}/${sqLabel}` : `$${rate} ${t('flat','fija')}`;
+      badge.className='rbadge'+(m.type==='flat'?' flat':'');
+    }
 
     const wEl = document.getElementById('warn-'+m.id);
     wEl.innerHTML='';
-    if (on) { const w=getWarn(m); if(w){const t=document.createElement('div');t.className='warn-tag';t.textContent=w;wEl.appendChild(t);} }
+    if (on) { const w=getWarn(m); if(w){const tg=document.createElement('div');tg.className='warn-tag';tg.textContent=w;wEl.appendChild(tg);} }
 
     const iEl = document.getElementById('inc-'+m.id);
     if (!on||rate===null) { iEl.textContent='$0.00'; iEl.className='minc zero'; }
@@ -414,21 +739,202 @@ function update() {
   document.getElementById('totalCost').textContent=fmt(totalCost);
   document.getElementById('totalInc').textContent=fmt(totalInc);
   document.getElementById('netCost').textContent=fmt(Math.max(0,totalCost-totalInc));
+  lastTotalInc = totalInc;
+  lastTotalCost = totalCost;
 
   const az=document.getElementById('alertZone'); az.innerHTML='';
   if (!state.utility||!state.propType) {
-    az.innerHTML=`<div class="alert warn">⚠ Select a utility and property type above to see accurate rates.</div>`;
+    az.innerHTML=`<div class="alert warn">⚠ ${t('Select a utility and property type above to see accurate rates.','Seleccione un proveedor y tipo de propiedad para ver las tarifas correctas.')}</div>`;
   }
 
   const fz=document.getElementById('formsNeeded');
-  if (forms.size===0) { fz.innerHTML='<span style="color:var(--text3);font-size:.8rem;">Select measures above to see required forms.</span>'; }
-  else {
+  const ph=document.getElementById('formsPlaceholder');
+  if (forms.size===0) {
+    fz.innerHTML='';
+    const s=document.createElement('span');
+    s.id='formsPlaceholder';
+    s.style.cssText='color:var(--text3);font-size:.8rem;';
+    s.textContent=t('Select measures above to see required forms.','Seleccione medidas arriba para ver los formularios necesarios.');
+    fz.appendChild(s);
+  } else {
     fz.innerHTML='';
     ['320C-WX','320C-HVAC','320C-WH'].forEach(f=>{
       const p=document.createElement('span'); p.className='pill'+(forms.has(f)?' on':''); p.textContent=f; fz.appendChild(p);
     });
     if (state.program==='swr') { const p=document.createElement('span'); p.className='pill on'; p.textContent='320SWR'; fz.appendChild(p); }
   }
+}
+
+// ─────────────────────────────────────────────
+//  INVOICE
+// ─────────────────────────────────────────────
+let lineItems = [];
+let lineCounter = 0;
+
+const CATEGORIES = {
+  labor: { en: 'Labor', es: 'Mano de Obra' },
+  material: { en: 'Material', es: 'Material' },
+  incentive: { en: 'Incentive', es: 'Incentivo' },
+  other: { en: 'Other', es: 'Otro' },
+};
+
+function catLabel(cat) {
+  return lang === 'es' ? (CATEGORIES[cat]?.es || cat) : (CATEGORIES[cat]?.en || cat);
+}
+
+function addLine(desc='', cat='labor', qty=1, price=0) {
+  const id = ++lineCounter;
+  lineItems.push({ id, desc, cat, qty, price });
+  renderLine(id, desc, cat, qty, price);
+  calcInvoice();
+}
+
+function renderLine(id, desc, cat, qty, price) {
+  const tbody = document.getElementById('lineBody');
+  const tr = document.createElement('tr');
+  tr.id = 'line-' + id;
+  tr.innerHTML = `
+    <td><input type="text" id="ld-${id}" value="${desc}" placeholder="${t('Description...','Descripción...')}" oninput="lineUpdate(${id})" style="min-width:160px"></td>
+    <td>
+      <select id="lc-${id}" onchange="lineUpdate(${id})" style="font-size:.75rem;padding:4px 6px;width:auto">
+        <option value="labor" ${cat==='labor'?'selected':''}>${catLabel('labor')}</option>
+        <option value="material" ${cat==='material'?'selected':''}>${catLabel('material')}</option>
+        <option value="incentive" ${cat==='incentive'?'selected':''}>${catLabel('incentive')}</option>
+        <option value="other" ${cat==='other'?'selected':''}>${catLabel('other')}</option>
+      </select>
+    </td>
+    <td><input type="number" class="right" id="lq-${id}" value="${qty}" min="0" step="0.01" oninput="lineUpdate(${id})" style="width:60px"></td>
+    <td><input type="number" class="right" id="lp-${id}" value="${price||''}" placeholder="0.00" min="0" step="0.01" oninput="lineUpdate(${id})" style="width:80px"></td>
+    <td class="line-total" id="lt-${id}">${fmt(qty*(price||0))}</td>
+    <td><button class="line-del" onclick="delLine(${id})" title="${t('Remove','Eliminar')}">✕</button></td>`;
+  tbody.appendChild(tr);
+}
+
+function lineUpdate(id) {
+  const item = lineItems.find(l => l.id === id);
+  if (!item) return;
+  item.desc = document.getElementById('ld-'+id).value;
+  item.cat = document.getElementById('lc-'+id).value;
+  item.qty = parseFloat(document.getElementById('lq-'+id).value) || 0;
+  item.price = parseFloat(document.getElementById('lp-'+id).value) || 0;
+  const total = item.qty * item.price;
+  document.getElementById('lt-'+id).textContent = fmt(total);
+  calcInvoice();
+}
+
+function delLine(id) {
+  lineItems = lineItems.filter(l => l.id !== id);
+  const row = document.getElementById('line-'+id);
+  if (row) row.remove();
+  calcInvoice();
+}
+
+function calcInvoice() {
+  // Subtotal from line items (exclude incentive category)
+  let subtotal = 0;
+  lineItems.forEach(l => {
+    if (l.cat !== 'incentive') subtotal += l.qty * l.price;
+  });
+
+  // Incentive credit from line items (cat=incentive) OR from estimator
+  let creditFromLines = 0;
+  lineItems.forEach(l => { if (l.cat === 'incentive') creditFromLines += l.qty * l.price; });
+
+  // Tax
+  const taxRate = parseFloat(document.getElementById('inv-tax-rate').value) || 0;
+  const discType = document.getElementById('inv-disc-type').value;
+  const discVal = parseFloat(document.getElementById('inv-disc-val').value) || 0;
+  const deposit = parseFloat(document.getElementById('inv-deposit').value) || 0;
+
+  const discount = discType === 'pct' ? subtotal * (discVal/100) : discVal;
+  const afterDisc = Math.max(0, subtotal - discount);
+  const tax = afterDisc * (taxRate/100);
+  const afterTax = afterDisc + tax;
+  const afterInc = Math.max(0, afterTax - creditFromLines);
+  const balance = Math.max(0, afterInc - deposit);
+
+  // Update totals cards
+  document.getElementById('inv-subtotal').textContent = fmt(subtotal);
+  document.getElementById('inv-tax-disp').textContent = fmt(tax);
+  document.getElementById('inv-credit-disp').textContent = fmt(creditFromLines);
+  document.getElementById('inv-grand').textContent = fmt(balance);
+
+  // Update breakdown
+  document.getElementById('inv-sub2').textContent = fmt(subtotal);
+  document.getElementById('inv-disc-disp').textContent = '– ' + fmt(discount);
+  document.getElementById('inv-disc-lbl').textContent = t('Discount','Descuento') + (discType==='pct' ? ` (${discVal}%)` : '');
+  document.getElementById('inv-tax-lbl').textContent = t(`Tax (${taxRate}%)`,`Impuesto (${taxRate}%)`);
+  document.getElementById('inv-tax-disp2').textContent = fmt(tax);
+  document.getElementById('inv-credit2').textContent = '– ' + fmt(creditFromLines);
+  document.getElementById('inv-after-inc').textContent = fmt(afterInc);
+  document.getElementById('inv-dep-disp').textContent = '– ' + fmt(deposit);
+  document.getElementById('inv-balance').textContent = fmt(balance);
+}
+
+function importFromEstimator() {
+  // Copy job info
+  document.getElementById('inv-cust').value = document.getElementById('custName').value;
+  document.getElementById('inv-addr').value = document.getElementById('custAddr').value;
+  document.getElementById('inv-contractor').value = document.getElementById('contractor').value;
+
+  // Remove existing non-blank lines
+  const toRemove = [...lineItems];
+  toRemove.forEach(l => {
+    if (!l.desc && !l.price) delLine(l.id);
+  });
+
+  // Add checked measures as line items
+  MEASURES.forEach(m => {
+    if (!state.checks[m.id]) return;
+    const rate = getRate(m);
+    const qty = state.qtys[m.id] || (m.type === 'flat' ? 1 : 0);
+    const labor = state.labors[m.id] || 0;
+    const name = lang === 'es' ? m.es : m.en;
+
+    if (labor > 0) {
+      addLine(name, 'labor', 1, labor);
+    }
+    if (rate !== null && qty > 0) {
+      const incAmt = m.type === 'sqft' ? rate * qty : rate;
+      addLine((lang==='es'?'Incentivo ETO: ':'ETO Incentive: ') + name, 'incentive', 1, Math.min(incAmt, labor || incAmt));
+    }
+  });
+
+  calcInvoice();
+  showTab('invoice');
+}
+
+function updateStatusBadge() {
+  const sel = document.getElementById('inv-status');
+  const badge = document.getElementById('statusBadge');
+  const val = sel.value;
+  badge.className = 'status-badge ' + val;
+  const labels = {
+    paid: t('Paid in Full','Pagado en Su Totalidad'),
+    unpaid: t('Unpaid','Sin Pagar'),
+    partial: t('Partial Payment','Pago Parcial'),
+  };
+  badge.textContent = labels[val] || val;
+}
+
+function markPaid() {
+  document.getElementById('inv-status').value = 'paid';
+  updateStatusBadge();
+}
+
+function clearInvoice() {
+  if (!confirm(t('Clear all invoice data?','¿Borrar todos los datos de la factura?'))) return;
+  const toRemove = [...lineItems];
+  toRemove.forEach(l => delLine(l.id));
+  ['inv-cust','inv-addr','inv-contractor','inv-ccb','inv-phone','inv-email','inv-notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('inv-tax-rate').value = '0';
+  document.getElementById('inv-disc-val').value = '0';
+  document.getElementById('inv-deposit').value = '0';
+  document.getElementById('inv-status').value = 'unpaid';
+  updateStatusBadge();
+  addLine(); addLine(); addLine();
 }
 
 init();
