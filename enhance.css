@@ -44,3 +44,7 @@ body{background:radial-gradient(circle at 90% -10%,rgba(255,122,26,.10),transpar
 .rebate-disclaimer,#lb-program-note{background:var(--surface2)!important;border-color:var(--border)!important;color:var(--text2)!important}
 #lb-program-note{border-left-color:var(--accent)!important}
 .canvas-area{background:#EEF2EE}.room-item.sel{background:#F0F5F1}
+
+
+@media print{.lb-quickstart,.lb-save{display:none!important}body{background:#fff!important}.card{box-shadow:none!important}}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
