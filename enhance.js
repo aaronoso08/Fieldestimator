@@ -43,7 +43,12 @@
     }catch(e){}
   }
   restore();
-  function labelRows(){document.querySelectorAll('.mrow').forEach(row=>{
+  function labelRows(){
+    if(title)title.textContent=lang==='es'?'Estimador de Trabajo':'Field Estimator';
+    if(sub)sub.textContent='Latino Built · Pro Source';
+    const quick=document.getElementById('lb-quickstart');
+    if(quick){quick.querySelector('strong').textContent=lang==='es'?'Estimación rápida':'Quick job estimate';quick.querySelector('span').textContent=lang==='es'?'1. Datos del trabajo · 2. Trabajo y cantidades · 3. Revisar total · 4. Imprimir o abrir Factura':'1. Add job info · 2. Select work & quantities · 3. Review total · 4. Print or open Invoice';}
+    document.querySelectorAll('.mrow').forEach(row=>{
     const name=row.querySelector('.mname')?.textContent||'Work';
     const cells=row.querySelectorAll('td');
     (lang==='es'?['Seleccionar','Trabajo','Tasa de incentivo','Cantidad / pies²','Costo del trabajo','Incentivo estimado']:['Select','Work','Incentive rate','Quantity / sq ft','Job cost','Estimated incentive']).forEach((label,i)=>{if(cells[i])cells[i].dataset.label=label;});
