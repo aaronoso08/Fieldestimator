@@ -57,3 +57,5 @@ body{background:radial-gradient(circle at 90% -10%,rgba(255,122,26,.10),transpar
 
 /* Neutral identity for independent review. */
 .topbar-icon,.mark{display:none!important}
+
+.tool-terms{max-width:1050px;margin:0 auto;padding:12px 24px 24px;color:var(--text2);font-size:12px;line-height:1.6}.tool-terms a{display:inline-flex;align-items:center;min-height:44px;color:var(--brand);font-size:14px;text-decoration:underline;text-underline-offset:3px}.tool-terms p{margin:4px 0}@media print{.tool-terms{padding:8px 0;font-size:10px;color:#14211B}}
