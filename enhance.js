@@ -1,4 +1,6 @@
 (()=>{
+  document.querySelectorAll('.nav-tab').forEach(el=>{el.setAttribute('role','button');el.tabIndex=0;el.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();el.click();}});});
+
   const title=document.querySelector('.topbar-title');
   const sub=document.querySelector('.topbar-sub');
   const icon=document.querySelector('.topbar-icon');
