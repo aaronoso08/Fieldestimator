@@ -1,13 +1,13 @@
-:root{--brand:#6B2D0F;--brand-mid:#8B3A12;--brand-light:#A0522D;--accent:#E87A2A;--bg:#F7F3EF;--surface:#FFF;--surface2:#FDF8F4;--border:#E8DDD4;--border-dark:#D4C4B0;--text:#1C1209;--text2:#5C4033;--text3:#9C7B6B}
+:root{--brand:#12211B;--brand-mid:#193B2D;--brand-light:#24513E;--accent:#FF7A1A;--bg:#F4F6F3;--surface:#FFF;--surface2:#F8FAF8;--border:#DEE5DF;--border-dark:#C8D3CA;--text:#14211B;--text2:#536158;--text3:#849087}
 .topbar{min-height:56px;height:56px;padding-left:16px;padding-right:16px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
 .topbar-icon{display:flex;align-items:center;justify-content:center;color:#fff;font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.02em;border:1px solid rgba(255,255,255,.2)}
 .topbar-title{font-family:'DM Sans',sans-serif!important;font-size:.95rem!important;font-weight:800!important;letter-spacing:-.02em!important}
 .topbar-sub{font-size:.62rem!important;opacity:.68!important}
 .nav-tabs{top:56px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.nav-tabs::-webkit-scrollbar{display:none}
 .main{max-width:960px;padding-top:16px}
-.card{border-radius:14px;box-shadow:0 1px 3px rgba(107,45,15,.08)}
+.card{border-radius:14px;box-shadow:0 1px 3px rgba(20,33,27,.08)}
 .card-header{padding:14px 16px}.card-body{padding:16px}
-.lb-quickstart{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(107,45,15,.06)}
+.lb-quickstart{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(20,33,27,.06)}
 .lb-quickstart strong{display:block;font-size:.82rem;color:var(--text);margin-bottom:2px}.lb-quickstart span{font-size:.75rem;line-height:1.45;color:var(--text2)}
 .lb-save{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.78);white-space:nowrap}
 input[type=text],input[type=number],input[type=email],select,textarea{min-height:42px;background:#fff}
@@ -31,3 +31,16 @@ input[type=text],input[type=number],input[type=email],select,textarea{min-height
  #measuresBody .minput{width:110px;max-width:50%} .mcheck{width:24px;height:24px;margin-top:8px}
  table:has(#measuresBody) thead{display:none} table:has(#measuresBody){width:100%;min-width:0}
 }
+
+/* Shared palette sampled from the live MilePay layout. */
+:root{--brand:#12211B;--brand-mid:#193B2D;--brand-light:#24513E;--accent:#FF7A1A;--accent-light:#FFB36B;--bg:#F4F6F3;--surface:#FFFFFF;--surface2:#F8FAF8;--border:#DEE5DF;--border-dark:#C8D3CA;--text:#14211B;--text2:#536158;--text3:#849087;--sh-sm:0 1px 2px rgba(20,33,27,.04),0 6px 18px rgba(20,33,27,.05);--sh:0 12px 30px rgba(20,33,27,.09);--sh-lg:0 24px 70px rgba(10,25,18,.20)}
+body{background:radial-gradient(circle at 90% -10%,rgba(255,122,26,.10),transparent 480px),radial-gradient(circle at 0% 18%,rgba(38,104,75,.08),transparent 544px),var(--bg);color:var(--text)}
+.topbar{background:rgba(18,33,27,.94);box-shadow:0 8px 28px rgba(10,25,18,.14)}
+.topbar-icon{background:linear-gradient(145deg,#FF933F,#F16600);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.card,.mode-card,.question-card,.result-card,.score-card{background:#fff;border-color:var(--border);box-shadow:var(--sh-sm)}
+.btn-primary,.calc-btn,.btn-import{background:var(--accent);color:#fff}
+.btn-primary:active,.calc-btn:hover,.btn-import:hover{background:#F16600}
+.lb-start-tip,.lb-quickstart{box-shadow:var(--sh-sm);border-color:var(--border);border-left-color:var(--accent)}
+.rebate-disclaimer,#lb-program-note{background:var(--surface2)!important;border-color:var(--border)!important;color:var(--text2)!important}
+#lb-program-note{border-left-color:var(--accent)!important}
+.canvas-area{background:#EEF2EE}.room-item.sel{background:#F0F5F1}
