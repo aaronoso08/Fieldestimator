@@ -1,0 +1,23 @@
+:root{--brand:#6B2D0F;--brand-mid:#8B3A12;--brand-light:#A0522D;--accent:#E87A2A;--bg:#F7F3EF;--surface:#FFF;--surface2:#FDF8F4;--border:#E8DDD4;--border-dark:#D4C4B0;--text:#1C1209;--text2:#5C4033;--text3:#9C7B6B}
+.topbar{min-height:56px;height:56px;padding-left:16px;padding-right:16px;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.topbar-icon{display:flex;align-items:center;justify-content:center;color:#fff;font-family:'DM Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.02em;border:1px solid rgba(255,255,255,.2)}
+.topbar-title{font-family:'DM Sans',sans-serif!important;font-size:.95rem!important;font-weight:800!important;letter-spacing:-.02em!important}
+.topbar-sub{font-size:.62rem!important;opacity:.68!important}
+.nav-tabs{top:56px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.nav-tabs::-webkit-scrollbar{display:none}
+.main{max-width:960px;padding-top:16px}
+.card{border-radius:14px;box-shadow:0 1px 3px rgba(107,45,15,.08)}
+.card-header{padding:14px 16px}.card-body{padding:16px}
+.lb-quickstart{display:flex;align-items:flex-start;gap:10px;background:#fff;border:1.5px solid var(--border);border-left:4px solid var(--accent);border-radius:12px;padding:12px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(107,45,15,.06)}
+.lb-quickstart strong{display:block;font-size:.82rem;color:var(--text);margin-bottom:2px}.lb-quickstart span{font-size:.75rem;line-height:1.45;color:var(--text2)}
+.lb-save{font-family:'DM Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.78);white-space:nowrap}
+input[type=text],input[type=number],input[type=email],select,textarea{min-height:42px;background:#fff}
+.btn-tb{min-height:36px}
+.source-note{color:var(--text3)}
+@media(max-width:640px){
+ .topbar{padding-left:10px;padding-right:10px}.topbar-icon{width:34px;height:34px}.topbar-actions{gap:5px}.lb-save{display:none}
+ .nav-tabs{padding:0 8px}.nav-tab{padding:11px 13px;font-size:.78rem}
+ .main{padding:14px 10px 80px}.card{margin-bottom:10px}.card-body{padding:14px 12px}.card-header{padding:12px}
+ input[type=text],input[type=number],input[type=email],select,textarea{font-size:16px!important;min-height:46px}
+ .totals-grid{gap:7px}.tc{padding:11px}.tc-val{font-size:1.15rem}
+ .lb-quickstart{padding:10px 12px;margin-bottom:10px}
+}
