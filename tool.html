@@ -201,7 +201,7 @@
     .screen:not(.print-target) { display: none !important; }
   }
 </style>
-</head>
+<link rel="stylesheet" href="enhance.css?v=8"></head>
 <body>
 
 <div class="topbar">
@@ -241,108 +241,12 @@
         <div class="fg"><label data-en="Customer Name" data-es="Nombre del Cliente">Customer Name</label><input type="text" id="custName" data-ph-en="Jane Smith" data-ph-es="Juan García" placeholder="Jane Smith"></div>
         <div class="fg"><label data-en="Property Address" data-es="Dirección de la Propiedad">Property Address</label><input type="text" id="custAddr" data-ph-en="123 Main St, Portland OR" data-ph-es="123 Calle Principal, Portland OR" placeholder="123 Main St, Portland OR"></div>
         <div class="fg"><label data-en="Contractor Name" data-es="Nombre del Contratista">Contractor Name</label><input type="text" id="contractor" data-ph-en="Your company name" data-ph-es="Nombre de su empresa" placeholder="Your company name"></div>
-        <div class="fg">
-          <label data-en="Utility Provider" data-es="Proveedor de Servicios">Utility Provider</label>
-          <select id="utility" onchange="update()">
-            <option value="" data-en="— Select utility —" data-es="— Seleccione proveedor —">— Select utility —</option>
-            <option value="PGE">Portland General Electric (PGE)</option>
-            <option value="PacPower">Pacific Power</option>
-            <option value="NWNatural">NW Natural</option>
-            <option value="Cascade">Cascade Natural Gas</option>
-            <option value="Avista">Avista</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label data-en="Property Type" data-es="Tipo de Propiedad">Property Type</label>
-          <select id="propType" onchange="update()">
-            <option value="" data-en="— Select type —" data-es="— Seleccione tipo —">— Select type —</option>
-            <option value="sfOwner" data-en="Single-Family — Owner-Occupied" data-es="Unifamiliar — Dueño Habita">Single-Family — Owner-Occupied</option>
-            <option value="sfRental" data-en="Single-Family — Rental" data-es="Unifamiliar — Renta">Single-Family — Rental</option>
-            <option value="attached" data-en="Attached (duplex / triplex / townhome)" data-es="Adjunto (dúplex / tríplex / townhome)">Attached (duplex / triplex / townhome)</option>
-            <option value="manufactured" data-en="Manufactured Home" data-es="Casa Manufacturada">Manufactured Home</option>
-          </select>
-        </div>
-        <div class="fg">
-          <label data-en="Program" data-es="Programa">Program</label>
-          <select id="program" onchange="update()">
-            <option value="standard" data-en="Standard" data-es="Estándar">Standard</option>
-            <option value="swr" data-en="Savings Within Reach (SWR)" data-es="Ahorros al Alcance (SWR)">Savings Within Reach (SWR)</option>
-            <option value="instant" data-en="Instant Incentive" data-es="Incentivo Instantáneo">Instant Incentive</option>
-          </select>
-        </div>
       </div>
     </div>
   </div>
 
-  <!-- 02 MEASURES -->
-  <div class="card">
-    <div class="card-header"><span class="card-num">02</span><span class="card-title" data-en="Select Measures" data-es="Seleccionar Medidas">Select Measures</span></div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:32px"></th>
-            <th data-en="Measure" data-es="Medida">Measure</th>
-            <th data-en="Incentive Rate" data-es="Tasa de Incentivo">Incentive Rate</th>
-            <th style="width:95px" data-en="Qty / Sq Ft" data-es="Cant / Pie²">Qty / Sq Ft</th>
-            <th style="width:105px" data-en="Your Job Cost" data-es="Costo del Trabajo">Your Job Cost</th>
-            <th style="width:100px;text-align:right" data-en="Incentive" data-es="Incentivo">Incentive</th>
-          </tr>
-        </thead>
-        <tbody id="measuresBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 03 TOTALS -->
-  <div class="card">
-    <div class="card-header"><span class="card-num">03</span><span class="card-title" data-en="Summary" data-es="Resumen">Summary</span></div>
-    <div class="card-body">
-      <div class="totals-grid">
-        <div class="tc orange">
-          <div class="tc-label" data-en="Total Job Cost" data-es="Costo Total del Trabajo">Total Job Cost</div>
-          <div class="tc-val orange" id="totalCost">$0.00</div>
-          <div class="tc-sub" data-en="Labor + materials" data-es="Mano de obra + materiales">Labor + materials</div>
-        </div>
-        <div class="tc green">
-          <div class="tc-label" data-en="Total Incentive" data-es="Incentivo Total">Total Incentive</div>
-          <div class="tc-val green" id="totalInc">$0.00</div>
-          <div class="tc-sub" data-en="Paid to contractor" data-es="Pagado al contratista">Paid to contractor</div>
-        </div>
-        <div class="tc">
-          <div class="tc-label" data-en="Customer Pays" data-es="Cliente Paga">Customer Pays</div>
-          <div class="tc-val" id="netCost">$0.00</div>
-          <div class="tc-sub" data-en="After incentive" data-es="Después del incentivo">After incentive</div>
-        </div>
-      </div>
-      <div id="alertZone"></div>
-    </div>
-  </div>
-
-  <!-- 04 FORMS -->
-  <div class="card">
-    <div class="card-header"><span class="card-num">04</span><span class="card-title" data-en="Forms &amp; Submission Notes" data-es="Formularios y Notas de Envío">Forms &amp; Submission Notes</span></div>
-    <div class="card-body">
-      <div class="doc-box">
-        <div class="doc-title" data-en="Forms Needed" data-es="Formularios Necesarios">Forms Needed</div>
-        <div class="pills" id="formsNeeded"><span id="formsPlaceholder" style="color:var(--text3);font-size:.8rem;" data-en="Select measures above to see required forms." data-es="Seleccione medidas arriba para ver los formularios necesarios.">Select measures above to see required forms.</span></div>
-      </div>
-      <div class="doc-box">
-        <div class="doc-title" data-en="Submission Requirements" data-es="Requisitos de Envío">Submission Requirements</div>
-        <ul class="doc-list">
-          <li><span data-en="Application + docs must be submitted <b>within 60 days</b> of install." data-es="La solicitud + documentos deben enviarse <b>dentro de 60 días</b> de la instalación.">Application + docs must be submitted <b>within 60 days</b> of install.</span></li>
-          <li><span data-en='Invoices must be marked <b>"paid in full"</b> before submitting (except SWR / Instant).' data-es='Las facturas deben marcarse como <b>"pagadas en su totalidad"</b> antes de enviar (excepto SWR / Instantáneo).'>Invoices must be marked <b>"paid in full"</b> before submitting (except SWR / Instant).</span></li>
-          <li><span data-en="Incentive <b>cannot exceed total installed cost</b> — this tool caps it automatically." data-es="El incentivo <b>no puede exceder el costo total instalado</b> — esta herramienta lo limita automáticamente.">Incentive <b>cannot exceed total installed cost</b> — this tool caps it automatically.</span></li>
-          <li><span data-en="Must hold a current <b>Oregon CCB license</b>." data-es="Debe tener una <b>licencia CCB de Oregon</b> vigente.">Must hold a current <b>Oregon CCB license</b>.</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="meta-row">
-      <span><b data-en="Estimate ID:" data-es="ID de Estimado:">Estimate ID:</b> <span id="estimateId">—</span></span>
-      <span><b data-en="Generated:" data-es="Generado:">Generated:</b> <span id="timestamp">—</span></span>
-    </div>
-  </div>
-
+<div class="card"><div class="card-header"><span class="card-num">02</span><span class="card-title" data-en="Work & materials" data-es="Trabajo y materiales">Work & materials</span></div><div class="card-body"><p class="estimate-help" data-en="Describe each item. Enter a quantity and the price per item, hour, or square foot. For a flat job price, use quantity 1." data-es="Describa cada partida. Ingrese cantidad y precio por unidad, hora o pie cuadrado. Para un precio fijo, use cantidad 1.">Describe each item. Enter a quantity and the price per item, hour, or square foot. For a flat job price, use quantity 1.</p><div id="workRows"></div><button class="btn btn-ghost no-print" onclick="addWork()" data-en="+ Add work or material" data-es="+ Agregar trabajo o material">+ Add work or material</button></div></div>
+<div class="card"><div class="card-header"><span class="card-num">03</span><span class="card-title" data-en="Estimate total" data-es="Total del presupuesto">Estimate total</span></div><div class="card-body"><div class="estimate-total" id="totalCost">$0.00</div><p class="estimate-help" data-en="Total before any invoice tax or discount. Review your scope and prices before sharing." data-es="Total antes de impuestos o descuentos de la factura. Revise el alcance y los precios antes de compartir.">Total before any invoice tax or discount. Review your scope and prices before sharing.</p><div class="estimate-actions no-print"><button class="btn btn-primary" onclick="importFromEstimator()" data-en="Create invoice" data-es="Crear factura">Create invoice</button><button class="btn btn-ghost" onclick="doPrint()" data-en="Print estimate" data-es="Imprimir presupuesto">Print estimate</button></div></div><div class="meta-row"><span> <span data-en="Estimate ID:" data-es="ID del presupuesto:">Estimate ID:</span> <span id="estimateId"></span></span></div></div>
 </div>
 </div><!-- end screen-estimator -->
 
@@ -371,7 +275,7 @@
       <div class="tc-val" id="inv-tax-disp">$0.00</div>
     </div>
     <div class="tc green">
-      <div class="tc-label" data-en="Incentive Credit" data-es="Crédito de Incentivo">Incentive Credit</div>
+      <div class="tc-label" data-en="Credit" data-es="Crédito">Credit</div>
       <div class="tc-val green" id="inv-credit-disp">$0.00</div>
     </div>
     <div class="tc" style="border-color: var(--brand); background: rgba(20,33,27,.04);">
@@ -455,12 +359,12 @@
           <span class="val" id="inv-tax-disp2">$0.00</span>
         </div>
         <div class="inv-total-row">
-          <span class="lbl" data-en="ETO Incentive Credit" data-es="Crédito de Incentivo ETO">ETO Incentive Credit</span>
+          <span class="lbl" data-en="Credit" data-es="Crédito">Credit</span>
           <span class="val" id="inv-credit2" style="color:var(--green)">– $0.00</span>
         </div>
         <div class="inv-divider"></div>
         <div class="inv-total-row">
-          <span class="lbl" data-en="After Incentive" data-es="Después del Incentivo">After Incentive</span>
+          <span class="lbl" data-en="After adjustments" data-es="Después de ajustes">After adjustments</span>
           <span class="val" id="inv-after-inc">$0.00</span>
         </div>
         <div class="inv-total-row">
@@ -536,7 +440,7 @@ function applyLang() {
   const isES = lang === 'es';
   document.getElementById('langBtn').textContent = isES ? '🌐 EN→ES' : '🌐 ES→EN';
   document.getElementById('tb-title').textContent = isES ? 'ESTIMADOR DE TRABAJO' : 'JOB ESTIMATOR';
-  document.getElementById('tb-sub').textContent = isES ? 'Oregon Residencial · 2026' : 'Oregon Residential · 2026';
+  document.getElementById('tb-sub').textContent = isES ? 'Latino Built · Pro Source' : 'Latino Built · Pro Source';
 
   // All data-en / data-es elements
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -584,189 +488,16 @@ function doPrint() {
 // ─────────────────────────────────────────────
 //  ESTIMATOR DATA
 // ─────────────────────────────────────────────
-const MEASURES = [
-  { id:'attic', en:'Attic Insulation', es:'Aislamiento de Ático', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
-    baseRate:{sfOwner:1.25,sfRental:1.50,attached:1.50,manufactured:1.25}, swrRate:1.50,
-    utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'wall', en:'Wall Insulation', es:'Aislamiento de Paredes', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
-    baseRate:{sfOwner:1.50,sfRental:2.25,attached:2.25,manufactured:null}, swrRate:2.25,
-    utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:['sfOwner','sfRental','attached'] },
-  { id:'floor', en:'Floor Insulation', es:'Aislamiento de Piso', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
-    baseRate:{sfOwner:0.75,sfRental:1.00,attached:1.00,manufactured:0.75},
-    swrRate:{sfOwner:1.00,sfRental:1.00,attached:1.00,manufactured:1.25},
-    utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'windows', en:'Windows (Single-Pane Replacement)', es:'Ventanas (Reemplazo de Un Panel)', sub_en:'Form 320C-WX · per sq ft', sub_es:'Formulario 320C-WX · por pie²', type:'sqft', form:'320C-WX',
-    baseRate:{sfOwner:10,sfRental:10,attached:10,manufactured:10}, swrRate:null,
-    utilityReq:['NWNatural'], propReq:null },
-  { id:'ductlessHP', en:'Ductless Heat Pump', es:'Bomba de Calor sin Ductos', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:800,sfRental:1800,attached:1800,manufactured:800}, swrRate:null,
-    utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'ductedHP', en:'Ducted Heat Pump', es:'Bomba de Calor con Ductos', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:1000,sfRental:1000,attached:3000,manufactured:1000}, swrRate:null,
-    utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'extCapHP', en:'Extended Capacity Heat Pump', es:'Bomba de Calor de Capacidad Extendida', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:1000,sfRental:2000,attached:2000,manufactured:1000}, swrRate:2000,
-    utilityReq:['PGE','PacPower'], propReq:null },
-  { id:'gasFurnace', en:'Gas Furnace (95%+ AFUE)', es:'Calefactor de Gas (95%+ AFUE)', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:null,sfRental:1600,attached:1600,manufactured:null}, swrRate:1600,
-    utilityReq:['NWNatural','Cascade','Avista'], propReq:['sfRental','attached'] },
-  { id:'smartThermo', en:'Smart Thermostat', es:'Termostato Inteligente', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:250,sfRental:250,attached:250,manufactured:250}, swrRate:null,
-    utilityReq:['PGE','PacPower','NWNatural','Cascade','Avista'], propReq:null },
-  { id:'tanklessWH', en:'Gas Tankless Water Heater', es:'Calentador de Agua a Gas sin Tanque', sub_en:'Form 320C-WH · flat rate', sub_es:'Formulario 320C-WH · tarifa fija', type:'flat', form:'320C-WH',
-    baseRate:{sfOwner:400,sfRental:400,attached:400,manufactured:400}, swrRate:null,
-    utilityReq:['NWNatural','Cascade','Avista'], propReq:null },
-  { id:'gasFireplace', en:'Gas Fireplace (FE 75%+)', es:'Chimenea de Gas (FE 75%+)', sub_en:'Form 320C-HVAC · flat rate', sub_es:'Formulario 320C-HVAC · tarifa fija', type:'flat', form:'320C-HVAC',
-    baseRate:{sfOwner:250,sfRental:250,attached:250,manufactured:250}, swrRate:null,
-    utilityReq:['NWNatural','Cascade','Avista'], propReq:null },
-];
-
-let state = { utility:'', propType:'', program:'standard', checks:{}, qtys:{}, labors:{}, id:genId() };
-function genId() { return 'EST-'+Date.now().toString(36).toUpperCase()+'-'+Math.random().toString(36).substring(2,6).toUpperCase(); }
-
-function init() {
-  const tbody = document.getElementById('measuresBody');
-  MEASURES.forEach(m => {
-    const tr = document.createElement('tr');
-    tr.className = 'mrow'; tr.id = 'row-'+m.id;
-    tr.innerHTML = `
-      <td><input type="checkbox" class="mcheck" id="chk-${m.id}" onchange="toggle('${m.id}')"></td>
-      <td><div class="mname" id="mname-${m.id}">${m.en}</div><div class="msub" id="msub-${m.id}">${m.sub_en}</div><div id="warn-${m.id}"></div></td>
-      <td><span class="rbadge" id="badge-${m.id}">—</span></td>
-      <td><input type="number" class="minput" id="qty-${m.id}" placeholder="${m.type==='sqft'?'sq ft':'1'}" min="0" ${m.type==='flat'?'value="1" max="1"':''} oninput="qc('${m.id}')" disabled></td>
-      <td><input type="number" class="minput" id="labor-${m.id}" placeholder="$" min="0" step="0.01" oninput="lc('${m.id}')" disabled></td>
-      <td class="minc zero" id="inc-${m.id}" style="text-align:right">$0.00</td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('timestamp').textContent = new Date().toLocaleString();
-  document.getElementById('estimateId').textContent = state.id;
-  // set today on invoice date
-  document.getElementById('inv-date').value = new Date().toLocaleDateString('en-US');
-  update();
-  addLine(); addLine(); addLine(); // start with 3 blank lines
-}
-
-function rebuildMeasureNames() {
-  MEASURES.forEach(m => {
-    const nameEl = document.getElementById('mname-'+m.id);
-    const subEl = document.getElementById('msub-'+m.id);
-    if (nameEl) nameEl.textContent = lang === 'es' ? m.es : m.en;
-    if (subEl) subEl.textContent = lang === 'es' ? m.sub_es : m.sub_en;
-  });
-}
-
-function toggle(id) {
-  const on = document.getElementById('chk-'+id).checked;
-  state.checks[id] = on;
-  document.getElementById('row-'+id).classList.toggle('active', on);
-  document.getElementById('qty-'+id).disabled = !on;
-  document.getElementById('labor-'+id).disabled = !on;
-  if (!on) {
-    const m = MEASURES.find(x=>x.id===id);
-    state.qtys[id]=0; state.labors[id]=0;
-    document.getElementById('qty-'+id).value = m.type==='flat'?'1':'';
-    document.getElementById('labor-'+id).value = '';
-  }
-  update();
-}
-
-function qc(id) { state.qtys[id]=parseFloat(document.getElementById('qty-'+id).value)||0; update(); }
-function lc(id) { state.labors[id]=parseFloat(document.getElementById('labor-'+id).value)||0; update(); }
-
-function getRate(m) {
-  const {utility,propType,program} = state;
-  if (!utility || !propType) return null;
-  if (m.utilityReq && utility && !m.utilityReq.includes(utility)) return null;
-  if (m.propReq && propType && !m.propReq.includes(propType)) return null;
-  let rate = propType ? (m.baseRate[propType]??null) : (m.baseRate['sfOwner']??null);
-  if (rate===null) return null;
-  if (program==='swr' && m.swrRate!=null) {
-    rate = typeof m.swrRate==='object' ? (propType?(m.swrRate[propType]??rate):rate) : m.swrRate;
-  }
-  return rate;
-}
-
-function getWarn(m) {
-  const {utility,propType} = state;
-  if (!utility) return t('Select utility to confirm eligibility','Seleccione proveedor para confirmar elegibilidad');
-  if (!propType) return t('Select property type to confirm eligibility','Seleccione tipo de propiedad para confirmar elegibilidad');
-  if (m.utilityReq && !m.utilityReq.includes(utility)) return t(`Not available for ${utility}`,`No disponible para ${utility}`);
-  if (m.propReq && !m.propReq.includes(propType)) return t('Not eligible for this property type','No elegible para este tipo de propiedad');
-  if (propType && m.baseRate[propType]===null) return t('No incentive for this combination','Sin incentivo para esta combinación');
-  return null;
-}
-
-function fmt(n) { return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-
-let lastTotalInc = 0;
-let lastTotalCost = 0;
-
-function update() {
-  state.utility = document.getElementById('utility').value;
-  state.propType = document.getElementById('propType').value;
-  state.program = document.getElementById('program').value;
-  let totalCost=0, totalInc=0;
-  const forms = new Set();
-
-  MEASURES.forEach(m => {
-    const on = !!state.checks[m.id];
-    const rate = getRate(m);
-    const qty = Math.max(0, state.qtys[m.id] ?? (m.type==='flat'?1:0));
-    const labor = Math.max(0, state.labors[m.id]||0);
-
-    const badge = document.getElementById('badge-'+m.id);
-    if (!state.utility||!state.propType) { badge.textContent='—'; badge.className='rbadge'; }
-    else if (rate===null) { badge.textContent=t('Not eligible','No elegible'); badge.className='rbadge ineligible'; }
-    else {
-      const sqLabel = lang==='es' ? 'pie²' : 'sqft';
-      badge.textContent = m.type==='sqft' ? `$${rate}/${sqLabel}` : `$${rate} ${t('flat','fija')}`;
-      badge.className='rbadge'+(m.type==='flat'?' flat':'');
-    }
-
-    const wEl = document.getElementById('warn-'+m.id);
-    wEl.innerHTML='';
-    if (on) { const w=getWarn(m); if(w){const tg=document.createElement('div');tg.className='warn-tag';tg.textContent=w;wEl.appendChild(tg);} }
-
-    if (on) { totalCost += labor; forms.add(m.form); }
-    const iEl = document.getElementById('inc-'+m.id);
-    if (!on||rate===null) { iEl.textContent='$0.00'; iEl.className='minc zero'; }
-    else {
-      let raw = m.type==='sqft' ? rate*qty : rate;
-      raw=Math.min(raw,labor);
-      iEl.textContent=fmt(raw); iEl.className='minc';
-      totalInc+=raw;
-    }
-  });
-
-  document.getElementById('totalCost').textContent=fmt(totalCost);
-  document.getElementById('totalInc').textContent=fmt(totalInc);
-  document.getElementById('netCost').textContent=fmt(Math.max(0,totalCost-totalInc));
-  lastTotalInc = totalInc;
-  lastTotalCost = totalCost;
-
-  const az=document.getElementById('alertZone'); az.innerHTML='';
-  if (!state.utility||!state.propType) {
-    az.innerHTML=`<div class="alert warn">⚠ ${t('Select a utility and property type above to see accurate rates.','Seleccione un proveedor y tipo de propiedad para ver las tarifas correctas.')}</div>`;
-  }
-
-  const fz=document.getElementById('formsNeeded');
-  const ph=document.getElementById('formsPlaceholder');
-  if (forms.size===0) {
-    fz.innerHTML='';
-    const s=document.createElement('span');
-    s.id='formsPlaceholder';
-    s.style.cssText='color:var(--text3);font-size:.8rem;';
-    s.textContent=t('Select measures above to see required forms.','Seleccione medidas arriba para ver los formularios necesarios.');
-    fz.appendChild(s);
-  } else {
-    fz.innerHTML='';
-    ['320C-WX','320C-HVAC','320C-WH'].forEach(f=>{
-      const p=document.createElement('span'); p.className='pill'+(forms.has(f)?' on':''); p.textContent=f; fz.appendChild(p);
-    });
-    if (state.program==='swr') { const p=document.createElement('span'); p.className='pill on'; p.textContent='320SWR'; fz.appendChild(p); }
-  }
-}
-
+let state={id:genId(),work:[]};let workCounter=0;
+function genId(){return 'EST-'+Date.now().toString(36).toUpperCase()}
+function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function init(){document.getElementById('estimateId').textContent=state.id;document.getElementById('inv-date').value=new Date().toLocaleDateString('en-US');addWork();addLine();}
+function addWork(desc='',cat='labor',qty=1,price=0){state.work.push({id:++workCounter,desc,cat,qty,price});renderWork();update()}
+function renderWork(){document.getElementById('workRows').innerHTML=state.work.map(w=>`<article class="work-row"><div class="work-description"><label for="work-desc-${w.id}">${t('Description','Descripción')}</label><input id="work-desc-${w.id}" value="${escapeHTML(w.desc)}" placeholder="${t('e.g. Paint bedroom, replace faucet…','Ej. Pintar dormitorio, cambiar grifo…')}" oninput="editWork(${w.id},'desc',this.value)"></div><div><label for="work-cat-${w.id}">${t('Type','Tipo')}</label><select id="work-cat-${w.id}" onchange="editWork(${w.id},'cat',this.value)">${['labor','material','other'].map(c=>`<option value="${c}" ${c===w.cat?'selected':''}>${catLabel(c)}</option>`).join('')}</select></div><div><label for="work-qty-${w.id}">${t('Quantity','Cantidad')}</label><input id="work-qty-${w.id}" type="number" min="0" step="any" value="${w.qty}" oninput="editWork(${w.id},'qty',this.value)"></div><div><label for="work-price-${w.id}">${t('Unit price ($)','Precio unitario ($)')}</label><input id="work-price-${w.id}" type="number" min="0" step="0.01" value="${w.price}" oninput="editWork(${w.id},'price',this.value)"></div><div class="work-amount"><span>${t('Amount','Importe')}</span><strong id="work-total-${w.id}">${fmt(w.qty*w.price)}</strong></div><button class="remove-work no-print" onclick="removeWork(${w.id})" aria-label="${t('Remove item','Eliminar partida')}">×</button></article>`).join('')}
+function editWork(id,key,value){const w=state.work.find(w=>w.id===id);if(!w)return;w[key]=['qty','price'].includes(key)?Math.max(0,Number(value)||0):value;update()}
+function removeWork(id){state.work=state.work.filter(w=>w.id!==id);renderWork();update()}
+function rebuildMeasureNames(){renderWork()}
+function update(){let total=0;state.work.forEach(w=>{const amount=w.qty*w.price;total+=amount;const e=document.getElementById('work-total-'+w.id);if(e)e.textContent=fmt(amount)});document.getElementById('totalCost').textContent=fmt(total)}
 // ─────────────────────────────────────────────
 //  INVOICE
 // ─────────────────────────────────────────────
@@ -776,7 +507,7 @@ let lineCounter = 0;
 const CATEGORIES = {
   labor: { en: 'Labor', es: 'Mano de Obra' },
   material: { en: 'Material', es: 'Material' },
-  incentive: { en: 'Incentive', es: 'Incentivo' },
+  incentive: { en: 'Credit', es: 'Crédito' },
   other: { en: 'Other', es: 'Otro' },
 };
 
@@ -874,40 +605,10 @@ function calcInvoice() {
   document.getElementById('inv-balance').textContent = fmt(balance);
 }
 
-function importFromEstimator() {
-  // Copy job info
-  document.getElementById('inv-cust').value = document.getElementById('custName').value;
-  document.getElementById('inv-addr').value = document.getElementById('custAddr').value;
-  document.getElementById('inv-contractor').value = document.getElementById('contractor').value;
-
-  // Remove existing non-blank lines
-  const toRemove = [...lineItems];
-  toRemove.forEach(l => {
-    if (l.sourceMeasure || (!l.desc && !l.price)) delLine(l.id);
-  });
-
-  // Add checked measures as line items
-  MEASURES.forEach(m => {
-    if (!state.checks[m.id]) return;
-    const rate = getRate(m);
-    const qty = state.qtys[m.id] || (m.type === 'flat' ? 1 : 0);
-    const labor = state.labors[m.id] || 0;
-    const name = lang === 'es' ? m.es : m.en;
-
-    if (labor > 0) {
-      addLine(name, 'labor', 1, labor);
-      lineItems[lineItems.length-1].sourceMeasure=m.id;
-    }
-    if (rate !== null && qty > 0 && labor > 0) {
-      const incAmt = m.type === 'sqft' ? rate * qty : rate;
-      addLine((lang==='es'?'Incentivo ETO: ':'ETO Incentive: ') + name, 'incentive', 1, Math.min(incAmt, labor));
-      lineItems[lineItems.length-1].sourceMeasure=m.id;
-    }
-  });
-
-  calcInvoice();
-  showTab('invoice');
-}
+function importFromEstimator(){
+[['inv-cust','custName'],['inv-addr','custAddr'],['inv-contractor','contractor']].forEach(([to,from])=>document.getElementById(to).value=document.getElementById(from).value);
+[...lineItems].filter(l=>l.sourceMeasure||l.sourceWork||(!l.desc&&!l.price)).forEach(l=>delLine(l.id));
+state.work.filter(w=>w.desc.trim()||w.price>0).forEach(w=>{addLine(w.desc||t('Work item','Partida'),w.cat,w.qty,w.price);lineItems[lineItems.length-1].sourceWork=w.id});calcInvoice();showTab('invoice');}
 
 function updateStatusBadge() {
   const sel = document.getElementById('inv-status');
@@ -947,6 +648,6 @@ function clearInvoice() {
 
 init();
 </script>
-</body>
+<script src="enhance.js?v=8"></script></body>
 </html>
 
