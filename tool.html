@@ -675,6 +675,7 @@ function lc(id) { state.labors[id]=parseFloat(document.getElementById('labor-'+i
 
 function getRate(m) {
   const {utility,propType,program} = state;
+  if (!utility || !propType) return null;
   if (m.utilityReq && utility && !m.utilityReq.includes(utility)) return null;
   if (m.propReq && propType && !m.propReq.includes(propType)) return null;
   let rate = propType ? (m.baseRate[propType]??null) : (m.baseRate['sfOwner']??null);
@@ -710,8 +711,8 @@ function update() {
   MEASURES.forEach(m => {
     const on = !!state.checks[m.id];
     const rate = getRate(m);
-    const qty = state.qtys[m.id]||(m.type==='flat'?1:0);
-    const labor = state.labors[m.id]||0;
+    const qty = Math.max(0, state.qtys[m.id] ?? (m.type==='flat'?1:0));
+    const labor = Math.max(0, state.labors[m.id]||0);
 
     const badge = document.getElementById('badge-'+m.id);
     if (!state.utility||!state.propType) { badge.textContent='—'; badge.className='rbadge'; }
@@ -726,13 +727,14 @@ function update() {
     wEl.innerHTML='';
     if (on) { const w=getWarn(m); if(w){const tg=document.createElement('div');tg.className='warn-tag';tg.textContent=w;wEl.appendChild(tg);} }
 
+    if (on) { totalCost += labor; forms.add(m.form); }
     const iEl = document.getElementById('inc-'+m.id);
     if (!on||rate===null) { iEl.textContent='$0.00'; iEl.className='minc zero'; }
     else {
       let raw = m.type==='sqft' ? rate*qty : rate;
-      if (labor>0) raw=Math.min(raw,labor);
+      raw=Math.min(raw,labor);
       iEl.textContent=fmt(raw); iEl.className='minc';
-      totalInc+=raw; totalCost+=labor; forms.add(m.form);
+      totalInc+=raw;
     }
   });
 
@@ -894,9 +896,9 @@ function importFromEstimator() {
     if (labor > 0) {
       addLine(name, 'labor', 1, labor);
     }
-    if (rate !== null && qty > 0) {
+    if (rate !== null && qty > 0 && labor > 0) {
       const incAmt = m.type === 'sqft' ? rate * qty : rate;
-      addLine((lang==='es'?'Incentivo ETO: ':'ETO Incentive: ') + name, 'incentive', 1, Math.min(incAmt, labor || incAmt));
+      addLine((lang==='es'?'Incentivo ETO: ':'ETO Incentive: ') + name, 'incentive', 1, Math.min(incAmt, labor));
     }
   });
 
