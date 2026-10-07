@@ -201,7 +201,7 @@
     .screen:not(.print-target) { display: none !important; }
   }
 </style>
-<link rel="stylesheet" href="enhance.css?v=9"></head>
+<link rel="stylesheet" href="enhance.css?v=12"></head>
 <body>
 
 <div class="topbar">
@@ -440,7 +440,7 @@ function applyLang() {
   const isES = lang === 'es';
   document.getElementById('langBtn').textContent = isES ? '🌐 EN→ES' : '🌐 ES→EN';
   document.getElementById('tb-title').textContent = isES ? 'ESTIMADOR DE TRABAJO' : 'JOB ESTIMATOR';
-  document.getElementById('tb-sub').textContent = isES ? 'Latino Built · Pro Source' : 'Latino Built · Pro Source';
+  document.getElementById('tb-sub').textContent = isES ? 'Independent prototype' : 'Independent prototype';
 
   // All data-en / data-es elements
   document.querySelectorAll('[data-en]').forEach(el => {
@@ -648,6 +648,6 @@ function clearInvoice() {
 
 init();
 </script>
-<script src="enhance.js?v=8"></script></body>
+<script src="enhance.js?v=12"></script></body>
 </html>
 
