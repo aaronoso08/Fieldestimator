@@ -21,3 +21,13 @@ input[type=text],input[type=number],input[type=email],select,textarea{min-height
  .totals-grid{gap:7px}.tc{padding:11px}.tc-val{font-size:1.15rem}
  .lb-quickstart{padding:10px 12px;margin-bottom:10px}
 }
+.lb-reference-note{font-size:.8rem;line-height:1.5;color:var(--text2);margin-top:12px}
+@media(max-width:640px){
+ #measuresBody{display:block} #measuresBody .mrow{display:grid;grid-template-columns:44px minmax(0,1fr);padding:12px;border-bottom:1px solid var(--border);gap:8px}
+ #measuresBody td{display:block;border:0;padding:0;min-width:0}
+ #measuresBody td:first-child{grid-row:1 / 6;display:flex;justify-content:center;align-items:flex-start}
+ #measuresBody td:nth-child(n+3){grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:8px}
+ #measuresBody td:nth-child(n+3)::before{content:attr(data-label);font-size:.75rem;color:var(--text2)}
+ #measuresBody .minput{width:110px;max-width:50%} .mcheck{width:24px;height:24px;margin-top:8px}
+ table:has(#measuresBody) thead{display:none} table:has(#measuresBody){width:100%;min-width:0}
+}
