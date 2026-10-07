@@ -43,13 +43,15 @@
     }catch(e){}
   }
   restore();
-  document.querySelectorAll('.mrow').forEach(row=>{
+  function labelRows(){document.querySelectorAll('.mrow').forEach(row=>{
     const name=row.querySelector('.mname')?.textContent||'Work';
     const cells=row.querySelectorAll('td');
-    ['Select','Work','Incentive rate','Quantity / sq ft','Job cost','Estimated incentive'].forEach((label,i)=>{if(cells[i])cells[i].dataset.label=label;});
-    row.querySelector('input[type=checkbox]')?.setAttribute('aria-label','Select '+name);
-    row.querySelectorAll('input[type=number]').forEach((el,i)=>el.setAttribute('aria-label',name+(i?' job cost':' quantity')));
-  });
+    (lang==='es'?['Seleccionar','Trabajo','Tasa de incentivo','Cantidad / pies²','Costo del trabajo','Incentivo estimado']:['Select','Work','Incentive rate','Quantity / sq ft','Job cost','Estimated incentive']).forEach((label,i)=>{if(cells[i])cells[i].dataset.label=label;});
+    row.querySelector('input[type=checkbox]')?.setAttribute('aria-label',(lang==='es'?'Seleccionar ':'Select ')+name);
+    row.querySelectorAll('input[type=number]').forEach((el,i)=>el.setAttribute('aria-label',name+(lang==='es'?(i?' costo del trabajo':' cantidad'):(i?' job cost':' quantity'))));
+  });}
+  labelRows();
+  document.getElementById('langBtn')?.addEventListener('click',labelRows);
   const note=document.createElement('p');note.className='lb-reference-note';
   note.setAttribute('data-en','Incentives are reference estimates. Verify current program rules and eligibility before quoting a customer.');
   note.setAttribute('data-es','Los incentivos son estimaciones de referencia. Verifique las reglas y la elegibilidad vigentes antes de cotizar.');
